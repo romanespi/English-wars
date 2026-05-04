@@ -64,19 +64,21 @@ header{position:relative;z-index:1;text-align:center;padding:40px 20px 0;}
 .war-sub{font-family:var(–fm);font-size:0.62rem;letter-spacing:0.2em;color:var(–dim);margin-bottom:32px;}
 
 /* BATTLE CARD */
-.battle-card{display:grid;grid-template-columns:1fr auto 1fr;background:var(–s1);border:1px solid var(–border2);border-radius:20px;overflow:hidden;position:relative;max-width:700px;margin:0 auto;box-shadow:0 0 80px rgba(0,0,0,0.5),0 0 0 1px rgba(255,255,255,0.04);}
-.battle-card::before{content:’’;position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,var(–M-glow) 0%,transparent 40%,transparent 60%,var(–T-glow) 100%);}
+.battle-card-wrap{padding:0 20px 28px;max-width:740px;margin:0 auto;}
+.battle-card{display:grid;grid-template-columns:1fr auto 1fr;background:linear-gradient(180deg,#13121F 0%,#0C0C18 100%);border-radius:20px;overflow:hidden;position:relative;box-shadow:0 0 0 1px rgba(255,107,53,0.3),0 0 0 1px rgba(56,189,248,0.0),0 4px 40px rgba(0,0,0,0.6),0 0 80px rgba(255,107,53,0.06),0 0 80px rgba(56,189,248,0.06);transition:box-shadow 0.4s ease;}
+.battle-card::before{content:’’;position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(255,107,53,0.13) 0%,transparent 38%,transparent 62%,rgba(56,189,248,0.13) 100%);}
+.battle-card::after{content:’’;position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(–M),rgba(255,255,255,0.15) 50%,var(–T));border-radius:20px 20px 0 0;}
 .player-zone{padding:28px 20px;display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;}
-.player-zone.marrito{background:linear-gradient(135deg,rgba(255,107,53,0.06) 0%,transparent 60%);}
-.player-zone.tanito{background:linear-gradient(225deg,rgba(56,189,248,0.06) 0%,transparent 60%);}
-.player-emoji{font-size:2.2rem;line-height:1;margin-bottom:4px;}
+.player-zone.marrito{background:linear-gradient(135deg,rgba(255,107,53,0.1) 0%,transparent 55%);}
+.player-zone.tanito{background:linear-gradient(225deg,rgba(56,189,248,0.1) 0%,transparent 55%);}
+.player-emoji{font-size:2.2rem;line-height:1;margin-bottom:4px;filter:drop-shadow(0 0 12px currentColor);}
 .player-name{font-family:var(–fn);font-size:1.8rem;letter-spacing:0.08em;}
-.player-zone.marrito .player-name{color:var(–M);}
-.player-zone.tanito .player-name{color:var(–T);}
+.player-zone.marrito .player-name{color:var(–M);text-shadow:0 0 20px rgba(255,107,53,0.5);}
+.player-zone.tanito .player-name{color:var(–T);text-shadow:0 0 20px rgba(56,189,248,0.5);}
 .player-pts-label{font-family:var(–fm);font-size:0.55rem;letter-spacing:0.15em;color:var(–muted);margin-top:2px;}
 .player-score{font-family:var(–fn);font-size:3.5rem;line-height:1;letter-spacing:0.05em;transition:all 0.4s ease;}
-.player-zone.marrito .player-score{color:var(–M);text-shadow:0 0 30px rgba(255,107,53,0.4);}
-.player-zone.tanito .player-score{color:var(–T);text-shadow:0 0 30px rgba(56,189,248,0.4);}
+.player-zone.marrito .player-score{color:var(–M);text-shadow:0 0 40px rgba(255,107,53,0.6);}
+.player-zone.tanito .player-score{color:var(–T);text-shadow:0 0 40px rgba(56,189,248,0.6);}
 .player-streak{font-family:var(–fm);font-size:0.56rem;color:var(–muted);letter-spacing:0.06em;}
 
 /* VS */
@@ -90,15 +92,40 @@ header{position:relative;z-index:1;text-align:center;padding:40px 20px 0;}
 .tug-center{position:absolute;left:50%;transform:translateX(-50%);top:-2px;width:2px;height:10px;background:rgba(255,255,255,0.25);border-radius:1px;}
 .leader-badge{font-family:var(–fm);font-size:0.48rem;letter-spacing:0.08em;padding:3px 6px;border-radius:3px;text-align:center;transition:all 0.4s ease;}
 
-/* NAV */
-.sticky-nav{position:sticky;top:0;z-index:100;background:rgba(8,8,15,0.9);backdrop-filter:blur(20px) saturate(1.5);border-bottom:1px solid var(–border);margin-top:24px;}
+/* NAV - desktop top bar */
+.sticky-nav{position:sticky;top:0;z-index:100;background:rgba(8,8,15,0.92);backdrop-filter:blur(20px) saturate(1.5);border-bottom:1px solid var(–border);margin-top:24px;}
 .nav-inner{max-width:900px;margin:0 auto;padding:0 20px;display:flex;align-items:center;}
-.nav-btn{font-family:var(–fm);font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;border:none;background:none;color:var(–muted);padding:14px 18px;border-bottom:2px solid transparent;transition:color 0.2s,border-color 0.2s;white-space:nowrap;}
+.nav-btn{font-family:var(–fm);font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;border:none;background:none;color:var(–muted);padding:14px 16px;border-bottom:2px solid transparent;transition:color 0.2s,border-color 0.2s;white-space:nowrap;}
 .nav-btn:hover{color:var(–text);}
 .nav-btn.active{color:var(–text);border-bottom-color:var(–text);}
 .nav-spacer{flex:1;}
+/* NAV - mobile bottom tab bar */
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(8,8,15,0.96);backdrop-filter:blur(24px) saturate(1.8);border-top:1px solid rgba(255,255,255,0.08);padding:0 4px env(safe-area-inset-bottom,0px);}
+.bottom-nav-inner{display:flex;justify-content:space-around;align-items:stretch;max-width:500px;margin:0 auto;}
+.bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:10px 4px;border:none;background:none;cursor:pointer;color:var(–dim);transition:color 0.2s;-webkit-tap-highlight-color:transparent;min-height:56px;}
+.bnav-btn.active{color:var(–text);}
+.bnav-icon{font-size:1.1rem;line-height:1;transition:transform 0.2s;}
+.bnav-btn.active .bnav-icon{transform:scale(1.15);}
+.bnav-label{font-family:var(–fm);font-size:0.45rem;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s;}
+.bnav-btn.active .bnav-label{color:var(–text);}
+.bnav-dot{width:4px;height:4px;border-radius:50%;background:transparent;transition:background 0.2s;margin-top:1px;}
+.bnav-btn.active .bnav-dot{background:var(–text);}
+@media(max-width:700px){
+.sticky-nav{display:none;}
+.bottom-nav{display:block;}
+.shell{padding-bottom:80px;}
+}
 
-/* VIEWS */
+/* VISUAL SEGMENTATION */
+.view-section{background:var(–s1);border:1px solid var(–border);border-radius:14px;padding:20px;margin-bottom:20px;position:relative;overflow:hidden;}
+.view-section::before{content:’’;position:absolute;top:0;left:0;right:0;height:1px;}
+.view-section.accent-m::before{background:linear-gradient(90deg,var(–M),transparent);}
+.view-section.accent-t::before{background:linear-gradient(90deg,var(–T),transparent);}
+.view-section.accent-n::before{background:linear-gradient(90deg,rgba(255,255,255,0.08),transparent);}
+.view-section-title{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.view-section-label{font-family:var(–fm);font-size:0.58rem;letter-spacing:0.22em;color:var(–dim);text-transform:uppercase;}
+.section-sep{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent);margin:24px 0;}
+
 .view{display:none;padding-top:28px;animation:fadeUp 0.4s ease forwards;}
 .view.active{display:block;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
@@ -301,7 +328,8 @@ header{position:relative;z-index:1;text-align:center;padding:40px 20px 0;}
 <header>
   <div class="war-eyebrow">⚔️ THE CHALLENGE · 4 SEMANAS · 60 MIN/DÍA</div>
   <div class="war-title">ENGLISH WARS</div>
-  <div class="war-sub">MARRITO &nbsp;·&nbsp; VS &nbsp;·&nbsp; TANITO</div>
+  <div class="war-sub">TANITO &nbsp;·&nbsp; VS &nbsp;·&nbsp; MARRITO</div>
+  <div class="battle-card-wrap">
   <div class="battle-card">
     <div class="player-zone marrito">
       <div class="player-emoji">🔥</div>
@@ -329,8 +357,21 @@ header{position:relative;z-index:1;text-align:center;padding:40px 20px 0;}
       <div class="player-pts-label">PUNTOS</div>
       <div class="player-streak" id="streak-t">0 días seguidos</div>
     </div>
-  </div>
+  </div><!-- /battle-card -->
+  </div><!-- /battle-card-wrap -->
 </header>
+
+<!-- BOTTOM NAV (mobile) -->
+
+<div class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <button class="bnav-btn active" data-view="dashboard"><span class="bnav-icon">📊</span><span class="bnav-label">Dashboard</span><div class="bnav-dot"></div></button>
+    <button class="bnav-btn" data-view="activities"><span class="bnav-icon">✅</span><span class="bnav-label">Actividades</span><div class="bnav-dot"></div></button>
+    <button class="bnav-btn" data-view="stats"><span class="bnav-icon">🏆</span><span class="bnav-label">Stats</span><div class="bnav-dot"></div></button>
+    <button class="bnav-btn" data-view="tecnicas"><span class="bnav-icon">⚡</span><span class="bnav-label">Técnicas</span><div class="bnav-dot"></div></button>
+    <button class="bnav-btn" data-view="metodo"><span class="bnav-icon">🧬</span><span class="bnav-label">Método</span><div class="bnav-dot"></div></button>
+  </div>
+</div>
 
 <div class="sticky-nav">
   <div class="nav-inner">
@@ -353,23 +394,60 @@ header{position:relative;z-index:1;text-align:center;padding:40px 20px 0;}
       <div class="section-label" style="margin:0;">RESUMEN EN VIVO</div>
       <div class="live-pill"><div class="live-dot"></div>SINCRONIZADO</div>
     </div>
-    <div class="dash-grid">
-      <div class="stat-card marrito">
-        <div class="stat-card-header"><div><div class="stat-player-name">Marrito</div><div style="font-family:var(--fm);font-size:0.53rem;color:var(--muted);">🔥 EL DE FUEGO</div></div><span style="font-size:1.3rem;">🔥</span></div>
-        <div id="stats-rows-m"></div><div class="cat-bars" id="cat-bars-m"></div>
-      </div>
-      <div class="stat-card tanito">
-        <div class="stat-card-header"><div><div class="stat-player-name">Tanito</div><div style="font-family:var(--fm);font-size:0.53rem;color:var(--muted);">⚡ EL DE LA LUZ</div></div><span style="font-size:1.3rem;">⚡</span></div>
-        <div id="stats-rows-t"></div><div class="cat-bars" id="cat-bars-t"></div>
+
+```
+<div class="view-section accent-m" style="margin-bottom:20px;">
+  <div class="view-section-title"><span style="font-size:1rem;">⚔️</span><span class="view-section-label">Comparativa de jugadores</span></div>
+  <div class="dash-grid">
+    <div class="stat-card marrito">
+      <div class="stat-card-header"><div><div class="stat-player-name">Marrito</div><div style="font-family:var(--fm);font-size:0.53rem;color:var(--muted);">🔥 EL DE FUEGO</div></div><span style="font-size:1.3rem;">🔥</span></div>
+      <div id="stats-rows-m"></div><div class="cat-bars" id="cat-bars-m"></div>
+    </div>
+    <div class="stat-card tanito">
+      <div class="stat-card-header"><div><div class="stat-player-name">Tanito</div><div style="font-family:var(--fm);font-size:0.53rem;color:var(--muted);">⚡ EL DE LA LUZ</div></div><span style="font-size:1.3rem;">⚡</span></div>
+      <div id="stats-rows-t"></div><div class="cat-bars" id="cat-bars-t"></div>
+    </div>
+  </div>
+</div>
+
+<div class="view-section accent-n">
+  <div class="view-section-title"><span style="font-size:1rem;">📅</span><span class="view-section-label">Progreso por semana</span></div>
+  <div class="week-progress-grid" id="week-prog-grid"></div>
+</div>
+
+<div class="section-sep"></div>
+
+<div class="view-section accent-n">
+  <div class="view-section-title"><span style="font-size:1rem;">⚡</span><span class="view-section-label">Últimas actividades</span><div class="live-pill" style="margin-left:auto;"><div class="live-dot"></div>LIVE</div></div>
+  <div id="activity-feed"></div>
+</div>
+
+<div class="view-section accent-n">
+  <div class="view-section-title"><span style="font-size:1rem;">❓</span><span class="view-section-label">Cómo funcionan puntos y racha</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
+      <div style="font-family:var(--fn);font-size:1rem;letter-spacing:0.06em;margin-bottom:10px;">⚡ PUNTOS POR ACTIVIDAD</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;justify-content:space-between;"><span style="font-family:var(--fm);font-size:0.57rem;color:var(--muted);">🏆 Reto semanal</span><span style="font-family:var(--fn);font-size:0.95rem;color:#F87171;">30</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="font-family:var(--fm);font-size:0.57rem;color:var(--muted);">🗣️ Output / hablar</span><span style="font-family:var(--fn);font-size:0.95rem;color:#FF6B35;">15</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="font-family:var(--fm);font-size:0.57rem;color:var(--muted);">🪞 Shadowing</span><span style="font-family:var(--fn);font-size:0.95rem;color:#A78BFA;">15</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="font-family:var(--fm);font-size:0.57rem;color:var(--muted);">📥 Input</span><span style="font-family:var(--fn);font-size:0.95rem;color:#D4BC5A;">12</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="font-family:var(--fm);font-size:0.57rem;color:var(--muted);">⚙️ Técnica</span><span style="font-family:var(--fn);font-size:0.95rem;color:#8AC98A;">12</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="font-family:var(--fm);font-size:0.57rem;color:var(--muted);">🃏 Anki SRS</span><span style="font-family:var(--fn);font-size:0.95rem;color:#38BDF8;">10</span></div>
       </div>
     </div>
-    <div class="section-label">PROGRESO POR SEMANA</div>
-    <div class="week-progress-grid" id="week-prog-grid"></div>
-    <div class="section-label">ÚLTIMAS ACTIVIDADES</div>
-    <div class="feed-card">
-      <div class="feed-header"><span class="feed-title">FEED EN TIEMPO REAL</span><div class="live-pill"><div class="live-dot"></div>LIVE</div></div>
-      <div id="activity-feed"></div>
+    <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
+      <div style="font-family:var(--fn);font-size:1rem;letter-spacing:0.06em;margin-bottom:8px;">🔥 RACHA DIARIA</div>
+      <div style="font-family:var(--fb);font-size:0.77rem;color:var(--muted);line-height:1.65;margin-bottom:10px;">La racha cuenta <strong style="color:var(--text);">días consecutivos</strong> con al menos <strong style="color:var(--text);">1 actividad</strong> marcada. Cada quien tiene la suya, independiente.</div>
+      <div style="background:rgba(255,107,53,0.06);border:1px solid rgba(255,107,53,0.2);border-radius:7px;padding:10px 12px;">
+        <div style="font-family:var(--fm);font-size:0.52rem;color:#FF6B35;letter-spacing:0.12em;margin-bottom:4px;">¿CÓMO MARCAR?</div>
+        <div style="font-family:var(--fb);font-size:0.75rem;color:var(--muted);line-height:1.5;">Ve a <strong style="color:var(--text);">Actividades</strong> → selecciona tu nombre → marca tus actividades del día. Cada quien en su dispositivo.</div>
+      </div>
     </div>
+  </div>
+</div>
+```
+
   </section>
 
   <!-- ACTIVITIES -->
@@ -580,6 +658,29 @@ header{position:relative;z-index:1;text-align:center;padding:40px 20px 0;}
     </div>
   </div>
 
+  <!-- Gemini Live -->
+  <div class="tech-card">
+    <div class="tech-card-header" style="border-top:3px solid #4285F4;">
+      <div class="tech-icon">🎙️</div>
+      <div class="tech-name" style="color:#4285F4;">Gemini Live</div>
+      <div class="tech-author">Google · IA conversacional en tiempo real · ilimitado y gratis</div>
+      <div class="tech-time-badge" style="background:rgba(66,133,244,0.12);color:#4285F4;">⏱ 15–30 min / sesión</div>
+    </div>
+    <div class="tech-body">
+      <div class="tech-desc">Conversación de voz en tiempo real con IA. A diferencia de un chatbot de texto, Gemini Live procesa tu voz, responde al instante y puede corregirte en el flujo natural de la conversación — igual que hablarías con un tutor. Sin límite de mensajes, disponible 24/7, sin miedo al juicio humano.</div>
+      <div class="why-box"><div class="why-box-label">GEMINI LIVE VS TANDEM — ¿CUÁNDO USAR CADA UNO?</div><div class="why-box-txt"><strong style="color:#4285F4;">Gemini Live:</strong> práctica diaria sin fricción. Para calentar, corregir gramática en tiempo real, hacer roleplays, debatir. Perfecto para semanas 1–3 cuando todavía da vergüenza hablar con un humano.<br><br><strong style="color:#38BDF8;">Tandem:</strong> conversación real con humano. Imprevisibilidad, cultura, modismos auténticos, el nervio de hablar con alguien de verdad. Insustituible en semana 3–4 para el salto final a la fluidez.</div></div>
+      <div class="tech-steps-label">PROMPTS QUE FUNCIONAN</div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#4285F4;color:#fff;">1</div><div class="tech-step-txt"><strong>Modo corrección:</strong> "Act as a strict English teacher. After every sentence I say, correct grammar and vocabulary. Explain each mistake briefly."</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#4285F4;color:#fff;">2</div><div class="tech-step-txt"><strong>Modo conversación:</strong> "Let's have a natural conversation about [tema]. Speak naturally but stop me if I say something that sounds unnatural."</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#4285F4;color:#fff;">3</div><div class="tech-step-txt"><strong>Modo roleplay:</strong> "Let's do a roleplay: you're [personaje]. Stay in character. Correct my English only after the scene ends."</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#4285F4;color:#fff;">4</div><div class="tech-step-txt"><strong>Modo debate:</strong> "Debate me on [tema]. Take the opposite side of whatever I say. Don't let me off the hook — push back hard."</div></div>
+      <div class="tech-tool-row">
+        <span class="tech-tool-label">HERRAMIENTA:</span>
+        <a class="tech-tool-link" href="https://gemini.google.com" target="_blank">Gemini Live — Google (gratis) ↗</a>
+      </div>
+    </div>
+  </div>
+
 </div><!-- /tech-grid -->
 ```
 
@@ -628,376 +729,733 @@ header{position:relative;z-index:1;text-align:center;padding:40px 20px 0;}
   <div class="rule-row"><span class="rule-tag" style="background:rgba(138,201,138,0.15);color:#8AC98A;">🟢 CONSEJO</span><div class="rule-txt"><strong>Consistencia &gt; Intensidad.</strong> 60 minutos diarios durante 28 días supera a un maratón de 8 horas un fin de semana. Siempre.</div></div>
 </div>
 
-<div class="section-label">HACKS DE INMERSIÓN · HAZLOS HOY</div>
-<div class="hacks-grid">
-  <div class="hack-card">
-    <div class="hack-emoji">📱</div>
-    <div class="hack-info"><div class="hack-name">Cambia tu teléfono al inglés</div><div class="hack-desc">30 segundos. Mayor ROI de toda la lista. Lees cientos de palabras en inglés al día sin esfuerzo extra. Hazlo ahora, no mañana.</div></div>
-  </div>
-  <div class="hack-card">
-    <div class="hack-emoji">📺</div>
-    <div class="hack-info"><div class="hack-name">Netflix y YouTube en inglés</div><div class="hack-desc">Cambia el idioma de la interfaz. Pon el autoplay en contenido en inglés. Tu feed se re-entrena solo en 3 días.</div></div>
-  </div>
-  <div class="hack-card">
-    <div class="hack-emoji">🏷️</div>
-    <div class="hack-info"><div class="hack-name">Etiqueta tu casa en inglés</div><div class="hack-desc">Post-its en cada objeto: mirror, fridge, door, window, lamp. Las ves 50 veces al día. Vocabulario doméstico en 1 semana.</div></div>
-  </div>
-  <div class="hack-card">
-    <div class="hack-emoji">🎵</div>
-    <div class="hack-info"><div class="hack-name">Escucha música en inglés</div><div class="hack-desc">Sin leer letras, solo escucha. Tu oído se calibra al ritmo del idioma sin que lo notes. Es input pasivo que suma.</div></div>
-  </div>
-  <div class="hack-card">
-    <div class="hack-emoji">⏰</div>
-    <div class="hack-info"><div class="hack-name">Alarmas y recordatorios en inglés</div><div class="hack-desc">"Study time", "Morning routine", "Call mom". Microdosis de inglés a lo largo del día sin costo de tiempo.</div></div>
-  </div>
-  <div class="hack-card">
-    <div class="hack-emoji">🚗</div>
-    <div class="hack-info"><div class="hack-name">Shadowing mientras manejas</div><div class="hack-desc">Pon un podcast en inglés en el coche. Sin subtítulos, sin parar. 20 min de trayecto = 20 min de input que antes eran tiempo muerto.</div></div>
-  </div>
-  <div class="hack-card">
-    <div class="hack-emoji">💬</div>
-    <div class="hack-info"><div class="hack-name">Mensajes de voz en inglés (a ti mismo)</div><div class="hack-desc">Cuando tengas un pensamiento complejo, envíate un mensaje de voz en inglés. Luego escúchalo. Output + input en 1 minuto.</div></div>
-  </div>
-  <div class="hack-card">
-    <div class="hack-emoji">📖</div>
-    <div class="hack-info"><div class="hack-name">Sigue cuentas en inglés</div><div class="hack-desc">Reemplaza 3 cuentas en español por 3 en inglés en tu tema favorito. Tu scroll diario se convierte en input comprensible.</div></div>
-  </div>
-  <div class="hack-card">
-    <div class="hack-emoji">🤖</div>
-    <div class="hack-info"><div class="hack-name">Claude como profe 24/7</div><div class="hack-desc">Escríbele a Claude en inglés cuando quieras practicar. Dile: "Correct my English and explain each mistake briefly." Gratis e ilimitado.</div></div>
-  </div>
-  <div class="hack-card">
-    <div class="hack-emoji">📔</div>
-    <div class="hack-info"><div class="hack-name">Diario de errores físico</div><div class="hack-desc">Un cuaderno pequeño. Cuando cometes un error, lo anotas + la versión correcta. Escribe la corrección 3 veces. Método Schmidt de Output Noticing.</div></div>
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE ENGLISH WARS · Tanito vs Marrito</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --M:#FF6B35;--M-dim:rgba(255,107,53,0.15);--M-glow:rgba(255,107,53,0.08);
+  --T:#38BDF8;--T-dim:rgba(56,189,248,0.15);--T-glow:rgba(56,189,248,0.08);
+  --bg:#08080F;--s1:#0F0F1C;--s2:#141424;--s3:#1A1A2E;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.1);
+  --text:#EDE9E1;--muted:rgba(237,233,225,0.45);--dim:rgba(237,233,225,0.2);
+  --fn:'Bebas Neue',sans-serif;--fm:'Space Mono',monospace;--fb:'Outfit',sans-serif;
+  --radius:12px;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);min-height:100vh;overflow-x:hidden;}
+
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(–bg);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;transition:opacity 0.5s ease;}
+#loader.hidden{opacity:0;pointer-events:none;}
+.loader-title{font-family:var(–fn);font-size:3rem;letter-spacing:0.06em;background:linear-gradient(135deg,var(–M),#fff 45%,#fff 55%,var(–T));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.loader-sub{font-family:var(–fm);font-size:0.6rem;letter-spacing:0.25em;color:var(–dim);}
+.loader-bar-wrap{width:200px;height:3px;background:var(–s3);border-radius:2px;overflow:hidden;}
+.loader-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(–M),var(–T));animation:loadBar 1.5s ease-in-out infinite;}
+@keyframes loadBar{0%{width:0%;margin-left:0}50%{width:60%}100%{width:0%;margin-left:200px}}
+.loader-err{font-family:var(–fm);font-size:0.6rem;color:#F87171;letter-spacing:0.1em;display:none;}
+
+/* CONNECTION */
+.conn-badge{display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;border:1px solid var(–border);font-family:var(–fm);font-size:0.55rem;letter-spacing:0.08em;transition:all 0.3s;}
+.conn-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;transition:all 0.3s;}
+.conn-badge.online{border-color:rgba(138,201,138,0.3);color:#8AC98A;}
+.conn-badge.online .conn-dot{background:#8AC98A;box-shadow:0 0 6px #8AC98A;}
+.conn-badge.offline{border-color:rgba(248,113,113,0.3);color:#F87171;}
+.conn-badge.offline .conn-dot{background:#F87171;}
+.conn-badge.connecting{border-color:var(–border);color:var(–muted);}
+.conn-badge.connecting .conn-dot{background:var(–muted);animation:blink 1s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.live-pill{display:inline-flex;align-items:center;gap:5px;font-family:var(–fm);font-size:0.52rem;letter-spacing:0.12em;color:#8AC98A;padding:2px 8px;border-radius:20px;background:rgba(138,201,138,0.1);border:1px solid rgba(138,201,138,0.2);}
+.live-dot{width:5px;height:5px;border-radius:50%;background:#8AC98A;animation:livePulse 1.5s infinite;}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.4;transform:scale(0.7);}}
+
+/* BACKGROUND */
+.bg-layer{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.bg-layer::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse 55% 60% at 5% 40%,rgba(255,107,53,0.07) 0%,transparent 65%),radial-gradient(ellipse 55% 60% at 95% 40%,rgba(56,189,248,0.07) 0%,transparent 65%);}
+.bg-layer::after{content:’’;position:absolute;inset:0;opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.grid-decor{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,0.012) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.012) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 0%,black 0%,transparent 70%);}
+
+/* LAYOUT */
+.shell{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 20px 80px;}
+
+/* HEADER */
+header{position:relative;z-index:1;text-align:center;padding:40px 20px 0;}
+.war-eyebrow{font-family:var(–fm);font-size:0.62rem;letter-spacing:0.3em;color:var(–muted);margin-bottom:10px;}
+.war-title{font-family:var(–fn);font-size:clamp(3rem,10vw,6rem);line-height:0.9;letter-spacing:0.04em;background:linear-gradient(135deg,var(–M) 0%,#fff 40%,#fff 60%,var(–T) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;}
+.war-sub{font-family:var(–fm);font-size:0.62rem;letter-spacing:0.2em;color:var(–dim);margin-bottom:32px;}
+
+/* BATTLE CARD */
+.battle-card-wrap{padding:0 20px 28px;max-width:740px;margin:0 auto;}
+.battle-card{display:grid;grid-template-columns:1fr auto 1fr;background:linear-gradient(180deg,#13121F 0%,#0C0C18 100%);border-radius:20px;overflow:hidden;position:relative;box-shadow:0 0 0 1px rgba(255,107,53,0.3),0 0 0 1px rgba(56,189,248,0.0),0 4px 40px rgba(0,0,0,0.6),0 0 80px rgba(255,107,53,0.06),0 0 80px rgba(56,189,248,0.06);transition:box-shadow 0.4s ease;}
+.battle-card::before{content:’’;position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(255,107,53,0.13) 0%,transparent 38%,transparent 62%,rgba(56,189,248,0.13) 100%);}
+.battle-card::after{content:’’;position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(–M),rgba(255,255,255,0.15) 50%,var(–T));border-radius:20px 20px 0 0;}
+.player-zone{padding:28px 20px;display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;}
+.player-zone.marrito{background:linear-gradient(135deg,rgba(255,107,53,0.1) 0%,transparent 55%);}
+.player-zone.tanito{background:linear-gradient(225deg,rgba(56,189,248,0.1) 0%,transparent 55%);}
+.player-emoji{font-size:2.2rem;line-height:1;margin-bottom:4px;filter:drop-shadow(0 0 12px currentColor);}
+.player-name{font-family:var(–fn);font-size:1.8rem;letter-spacing:0.08em;}
+.player-zone.marrito .player-name{color:var(–M);text-shadow:0 0 20px rgba(255,107,53,0.5);}
+.player-zone.tanito .player-name{color:var(–T);text-shadow:0 0 20px rgba(56,189,248,0.5);}
+.player-pts-label{font-family:var(–fm);font-size:0.55rem;letter-spacing:0.15em;color:var(–muted);margin-top:2px;}
+.player-score{font-family:var(–fn);font-size:3.5rem;line-height:1;letter-spacing:0.05em;transition:all 0.4s ease;}
+.player-zone.marrito .player-score{color:var(–M);text-shadow:0 0 40px rgba(255,107,53,0.6);}
+.player-zone.tanito .player-score{color:var(–T);text-shadow:0 0 40px rgba(56,189,248,0.6);}
+.player-streak{font-family:var(–fm);font-size:0.56rem;color:var(–muted);letter-spacing:0.06em;}
+
+/* VS */
+.vs-zone{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 14px;border-left:1px solid var(–border);border-right:1px solid var(–border);min-width:84px;gap:10px;}
+.vs-text{font-family:var(–fn);font-size:2rem;letter-spacing:0.1em;color:var(–dim);}
+.tug-wrap{width:60px;}
+.tug-label{font-family:var(–fm);font-size:0.5rem;letter-spacing:0.1em;color:var(–dim);text-align:center;margin-bottom:4px;}
+.tug-bar{height:6px;border-radius:3px;background:var(–s3);position:relative;overflow:hidden;}
+.tug-fill-m{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(–M),rgba(255,107,53,0.5));border-radius:3px 0 0 3px;transition:width 0.6s cubic-bezier(0.16,1,0.3,1);}
+.tug-fill-t{position:absolute;right:0;top:0;bottom:0;background:linear-gradient(90deg,rgba(56,189,248,0.5),var(–T));border-radius:0 3px 3px 0;transition:width 0.6s cubic-bezier(0.16,1,0.3,1);}
+.tug-center{position:absolute;left:50%;transform:translateX(-50%);top:-2px;width:2px;height:10px;background:rgba(255,255,255,0.25);border-radius:1px;}
+.leader-badge{font-family:var(–fm);font-size:0.48rem;letter-spacing:0.08em;padding:3px 6px;border-radius:3px;text-align:center;transition:all 0.4s ease;}
+
+/* NAV - desktop top bar */
+.sticky-nav{position:sticky;top:0;z-index:100;background:rgba(8,8,15,0.92);backdrop-filter:blur(20px) saturate(1.5);border-bottom:1px solid var(–border);margin-top:24px;}
+.nav-inner{max-width:900px;margin:0 auto;padding:0 20px;display:flex;align-items:center;}
+.nav-btn{font-family:var(–fm);font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;border:none;background:none;color:var(–muted);padding:14px 16px;border-bottom:2px solid transparent;transition:color 0.2s,border-color 0.2s;white-space:nowrap;}
+.nav-btn:hover{color:var(–text);}
+.nav-btn.active{color:var(–text);border-bottom-color:var(–text);}
+.nav-spacer{flex:1;}
+/* NAV - mobile bottom tab bar */
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(8,8,15,0.96);backdrop-filter:blur(24px) saturate(1.8);border-top:1px solid rgba(255,255,255,0.08);padding:0 4px env(safe-area-inset-bottom,0px);}
+.bottom-nav-inner{display:flex;justify-content:space-around;align-items:stretch;max-width:500px;margin:0 auto;}
+.bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:10px 4px;border:none;background:none;cursor:pointer;color:var(–dim);transition:color 0.2s;-webkit-tap-highlight-color:transparent;min-height:56px;}
+.bnav-btn.active{color:var(–text);}
+.bnav-icon{font-size:1.1rem;line-height:1;transition:transform 0.2s;}
+.bnav-btn.active .bnav-icon{transform:scale(1.15);}
+.bnav-label{font-family:var(–fm);font-size:0.45rem;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s;}
+.bnav-btn.active .bnav-label{color:var(–text);}
+.bnav-dot{width:4px;height:4px;border-radius:50%;background:transparent;transition:background 0.2s;margin-top:1px;}
+.bnav-btn.active .bnav-dot{background:var(–text);}
+@media(max-width:700px){
+.sticky-nav{display:none;}
+.bottom-nav{display:block;}
+.shell{padding-bottom:80px;}
+}
+
+/* VISUAL SEGMENTATION */
+.view-section{background:var(–s1);border:1px solid var(–border);border-radius:14px;padding:20px;margin-bottom:20px;position:relative;overflow:hidden;}
+.view-section::before{content:’’;position:absolute;top:0;left:0;right:0;height:1px;}
+.view-section.accent-m::before{background:linear-gradient(90deg,var(–M),transparent);}
+.view-section.accent-t::before{background:linear-gradient(90deg,var(–T),transparent);}
+.view-section.accent-n::before{background:linear-gradient(90deg,rgba(255,255,255,0.08),transparent);}
+.view-section-title{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.view-section-label{font-family:var(–fm);font-size:0.58rem;letter-spacing:0.22em;color:var(–dim);text-transform:uppercase;}
+.section-sep{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent);margin:24px 0;}
+
+.view{display:none;padding-top:28px;animation:fadeUp 0.4s ease forwards;}
+.view.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.section-label{font-family:var(–fm);font-size:0.58rem;letter-spacing:0.25em;color:var(–dim);text-transform:uppercase;margin-bottom:14px;}
+
+/* DASHBOARD */
+.dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;}
+.stat-card{background:var(–s1);border:1px solid var(–border);border-radius:var(–radius);padding:20px;position:relative;overflow:hidden;transition:border-color 0.2s;}
+.stat-card:hover{border-color:var(–border2);}
+.stat-card::before{content:’’;position:absolute;top:0;left:0;right:0;height:2px;border-radius:12px 12px 0 0;}
+.stat-card.marrito::before{background:linear-gradient(90deg,var(–M),transparent);}
+.stat-card.tanito::before{background:linear-gradient(90deg,var(–T),transparent);}
+.stat-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.stat-player-name{font-family:var(–fn);font-size:1.2rem;letter-spacing:0.08em;}
+.stat-card.marrito .stat-player-name{color:var(–M);}
+.stat-card.tanito .stat-player-name{color:var(–T);}
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(–border);}
+.stat-row:last-child{border-bottom:none;}
+.stat-row-label{font-family:var(–fm);font-size:0.58rem;letter-spacing:0.06em;color:var(–muted);}
+.stat-row-val{font-family:var(–fm);font-size:0.78rem;font-weight:700;}
+.cat-bars{margin-top:14px;}
+.cat-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:7px;}
+.cat-bar-label{font-family:var(–fm);font-size:0.53rem;color:var(–muted);width:64px;flex-shrink:0;}
+.cat-bar-track{flex:1;height:4px;background:var(–s3);border-radius:2px;overflow:hidden;}
+.cat-bar-fill{height:100%;border-radius:2px;transition:width 0.6s cubic-bezier(0.16,1,0.3,1);}
+.cat-bar-count{font-family:var(–fm);font-size:0.53rem;color:var(–muted);width:18px;text-align:right;flex-shrink:0;}
+.week-progress-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px;}
+.week-prog-card{background:var(–s1);border:1px solid var(–border);border-radius:var(–radius);padding:14px 12px;text-align:center;}
+.week-prog-label{font-family:var(–fn);font-size:1.1rem;letter-spacing:0.06em;color:var(–muted);margin-bottom:6px;}
+.week-prog-bars{display:flex;gap:4px;height:56px;align-items:flex-end;justify-content:center;}
+.week-prog-bar{width:16px;border-radius:3px 3px 0 0;min-height:2px;transition:height 0.6s cubic-bezier(0.16,1,0.3,1);}
+.week-prog-pcts{display:flex;justify-content:center;gap:4px;margin-top:5px;}
+.week-prog-pct{font-family:var(–fm);font-size:0.53rem;width:18px;text-align:center;}
+.feed-card{background:var(–s1);border:1px solid var(–border);border-radius:var(–radius);overflow:hidden;margin-bottom:24px;}
+.feed-header{padding:12px 18px;border-bottom:1px solid var(–border);display:flex;align-items:center;justify-content:space-between;}
+.feed-title{font-family:var(–fm);font-size:0.6rem;letter-spacing:0.15em;color:var(–muted);text-transform:uppercase;}
+.feed-item{padding:12px 18px;border-bottom:1px solid var(–border);display:flex;align-items:center;gap:12px;}
+.feed-item:last-child{border-bottom:none;}
+.feed-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.feed-info{flex:1;}
+.feed-act-name{font-family:var(–fb);font-size:0.8rem;font-weight:500;margin-bottom:2px;}
+.feed-meta{font-family:var(–fm);font-size:0.56rem;color:var(–muted);letter-spacing:0.05em;}
+.feed-pts{font-family:var(–fm);font-size:0.65rem;font-weight:700;}
+.feed-empty{padding:28px 18px;text-align:center;font-family:var(–fm);font-size:0.62rem;color:var(–dim);letter-spacing:0.1em;}
+
+/* ACTIVITIES */
+.player-toggle{display:flex;background:var(–s1);border:1px solid var(–border);border-radius:50px;padding:4px;margin-bottom:24px;max-width:320px;}
+.toggle-btn{flex:1;font-family:var(–fn);font-size:1rem;letter-spacing:0.1em;cursor:pointer;border:none;background:none;color:var(–muted);padding:10px 16px;border-radius:50px;transition:all 0.25s ease;display:flex;align-items:center;justify-content:center;gap:6px;}
+.toggle-btn.active-m{background:var(–M-dim);color:var(–M);box-shadow:0 0 20px rgba(255,107,53,0.15);}
+.toggle-btn.active-t{background:var(–T-dim);color:var(–T);box-shadow:0 0 20px rgba(56,189,248,0.15);}
+.week-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.week-tab{font-family:var(–fm);font-size:0.6rem;letter-spacing:0.1em;cursor:pointer;border:1px solid var(–border);background:transparent;color:var(–muted);padding:6px 14px;border-radius:50px;transition:all 0.2s;white-space:nowrap;}
+.week-tab:hover{border-color:var(–border2);color:var(–text);}
+.week-tab.active{background:var(–s2);border-color:var(–border2);color:var(–text);}
+.day-block{margin-bottom:10px;background:var(–s1);border:1px solid var(–border);border-radius:var(–radius);overflow:hidden;transition:border-color 0.2s;}
+.day-block:hover{border-color:var(–border2);}
+.day-block-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;cursor:pointer;user-select:none;}
+.day-block-left{display:flex;align-items:center;gap:10px;}
+.day-label-pill{font-family:var(–fm);font-size:0.56rem;letter-spacing:0.1em;padding:2px 8px;border-radius:3px;font-weight:700;}
+.day-name{font-family:var(–fb);font-size:0.88rem;font-weight:600;}
+.day-progress{font-family:var(–fm);font-size:0.56rem;color:var(–muted);}
+.day-chevron{color:var(–dim);font-size:0.7rem;transition:transform 0.25s;font-family:var(–fm);}
+.day-block.open .day-chevron{transform:rotate(90deg);}
+.day-acts{border-top:1px solid var(–border);}
+.act-row{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border-bottom:1px solid var(–border);cursor:pointer;transition:background 0.15s;}
+.act-row:last-child{border-bottom:none;}
+.act-row:hover{background:rgba(255,255,255,0.02);}
+.act-row.done{opacity:0.65;}
+.act-checkbox{width:22px;height:22px;border:2px solid var(–border2);border-radius:6px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all 0.2s ease;}
+.act-checkbox.checked-m{border-color:var(–M);background:var(–M-dim);}
+.act-checkbox.checked-t{border-color:var(–T);background:var(–T-dim);}
+.check-icon{font-size:0.75rem;opacity:0;transform:scale(0);transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1);}
+.act-checkbox.checked-m .check-icon,.act-checkbox.checked-t .check-icon{opacity:1;transform:scale(1);}
+.act-icon{font-size:1.2rem;flex-shrink:0;line-height:1.4;}
+.act-info{flex:1;}
+.act-name{font-family:var(–fb);font-size:0.85rem;font-weight:600;margin-bottom:3px;}
+.act-row.done .act-name{text-decoration:line-through;color:var(–muted);}
+.act-desc{font-family:var(–fb);font-size:0.77rem;color:var(–muted);line-height:1.55;margin-bottom:6px;}
+.act-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.act-tag{font-family:var(–fm);font-size:0.55rem;letter-spacing:0.08em;padding:2px 6px;border-radius:3px;font-weight:700;}
+.act-time{font-family:var(–fm);font-size:0.56rem;color:var(–muted);}
+.act-tool{font-family:var(–fm);font-size:0.56rem;color:var(–muted);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,0.18);transition:color 0.15s,border-color 0.15s;}
+.act-tool:hover{color:var(–text);}
+.act-done-time{font-family:var(–fm);font-size:0.52rem;color:var(–muted);text-align:right;flex-shrink:0;margin-top:2px;}
+.pts-toast{position:fixed;font-family:var(–fn);font-size:1.4rem;pointer-events:none;z-index:9999;animation:toastUp 1.2s ease forwards;}
+@keyframes toastUp{0%{opacity:0;transform:translateY(0) scale(0.5);}20%{opacity:1;transform:translateY(-10px) scale(1);}80%{opacity:1;transform:translateY(-40px);}100%{opacity:0;transform:translateY(-60px) scale(0.8);}}
+
+/* STATS */
+.stats-comparison{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;margin-bottom:24px;align-items:start;}
+.stats-vs-divider{display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:60px;gap:8px;}
+.stats-vs-text{font-family:var(–fn);font-size:1.5rem;color:var(–dim);letter-spacing:0.1em;}
+.stats-player-card{background:var(–s1);border:1px solid var(–border);border-radius:var(–radius);overflow:hidden;}
+.stats-card-header{padding:18px 18px 14px;border-bottom:1px solid var(–border);}
+.stats-card-name{font-family:var(–fn);font-size:1.6rem;letter-spacing:0.08em;margin-bottom:4px;}
+.stats-card-pts{font-family:var(–fn);font-size:3rem;line-height:1;letter-spacing:0.04em;}
+.stats-card-pts-label{font-family:var(–fm);font-size:0.55rem;letter-spacing:0.15em;color:var(–muted);margin-top:2px;}
+.stats-card-body{padding:16px 18px;}
+.stats-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(–border);}
+.stats-row:last-child{border-bottom:none;}
+.stats-row-label{font-family:var(–fm);font-size:0.58rem;color:var(–muted);letter-spacing:0.06em;}
+.stats-row-val{font-family:var(–fm);font-size:0.72rem;font-weight:700;}
+.weeks-breakdown{background:var(–s1);border:1px solid var(–border);border-radius:var(–radius);overflow:hidden;margin-bottom:24px;}
+.weeks-breakdown-header{padding:12px 18px;border-bottom:1px solid var(–border);}
+.week-compare-row{display:flex;align-items:center;gap:14px;padding:12px 18px;border-bottom:1px solid var(–border);}
+.week-compare-row:last-child{border-bottom:none;}
+.week-compare-label{font-family:var(–fn);font-size:1rem;color:var(–muted);width:28px;flex-shrink:0;}
+.week-compare-bars{flex:1;display:flex;flex-direction:column;gap:4px;}
+.week-compare-bar-row{display:flex;align-items:center;gap:8px;}
+.week-compare-bar-track{flex:1;height:5px;background:var(–s3);border-radius:3px;overflow:hidden;}
+.week-compare-bar-fill{height:100%;border-radius:3px;transition:width 0.6s cubic-bezier(0.16,1,0.3,1);}
+.week-compare-pct{font-family:var(–fm);font-size:0.56rem;color:var(–muted);width:30px;text-align:right;flex-shrink:0;}
+.winner-banner{background:var(–s1);border:1px solid var(–border);border-radius:var(–radius);padding:24px;text-align:center;position:relative;overflow:hidden;margin-bottom:24px;}
+.winner-banner::before{content:’’;position:absolute;inset:0;opacity:0.05;background:var(–dim);}
+.winner-banner.leading-m::before{background:var(–M);}
+.winner-banner.leading-t::before{background:var(–T);}
+.winner-crown{font-size:2.5rem;margin-bottom:8px;}
+.winner-label{font-family:var(–fm);font-size:0.6rem;letter-spacing:0.25em;color:var(–muted);margin-bottom:6px;}
+.winner-name{font-family:var(–fn);font-size:3rem;letter-spacing:0.08em;}
+.winner-diff{font-family:var(–fm);font-size:0.7rem;color:var(–muted);margin-top:6px;letter-spacing:0.1em;}
+.reset-zone{text-align:center;padding:20px 0;}
+.reset-btn{font-family:var(–fm);font-size:0.56rem;letter-spacing:0.12em;color:var(–dim);background:none;border:1px solid var(–border);border-radius:50px;padding:7px 16px;cursor:pointer;transition:all 0.2s;}
+.reset-btn:hover{color:#ff6b6b;border-color:rgba(255,107,107,0.3);}
+.tag-SRS{background:rgba(56,189,248,0.12);color:#38BDF8;}
+.tag-INPUT{background:rgba(212,188,90,0.12);color:#D4BC5A;}
+.tag-OUTPUT{background:rgba(255,107,53,0.12);color:#FF6B35;}
+.tag-SHADOWING{background:rgba(167,139,250,0.12);color:#A78BFA;}
+.tag-TÉCNICA{background:rgba(138,201,138,0.12);color:#8AC98A;}
+.tag-RETO{background:rgba(248,113,113,0.12);color:#F87171;}
+/* TÉCNICAS & MÉTODO */
+.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;}
+.tech-card{background:var(–s1);border:1px solid var(–border);border-radius:var(–radius);overflow:hidden;transition:border-color 0.2s,transform 0.2s;cursor:pointer;}
+.tech-card:hover{border-color:var(–border2);transform:translateY(-2px);}
+.tech-card-header{padding:18px 20px 14px;border-bottom:1px solid var(–border);}
+.tech-icon{font-size:1.8rem;margin-bottom:8px;}
+.tech-name{font-family:var(–fn);font-size:1.3rem;letter-spacing:0.06em;margin-bottom:2px;}
+.tech-author{font-family:var(–fm);font-size:0.52rem;letter-spacing:0.1em;color:var(–dim);}
+.tech-time-badge{display:inline-block;font-family:var(–fm);font-size:0.52rem;letter-spacing:0.08em;padding:2px 8px;border-radius:3px;margin-top:6px;font-weight:700;}
+.tech-body{padding:16px 20px;}
+.tech-desc{font-family:var(–fb);font-size:0.82rem;color:var(–muted);line-height:1.65;margin-bottom:14px;}
+.tech-steps-label{font-family:var(–fm);font-size:0.55rem;letter-spacing:0.18em;color:var(–dim);margin-bottom:10px;}
+.tech-step{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;}
+.tech-step-num{font-family:var(–fm);font-size:0.6rem;font-weight:700;width:20px;height:20px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.tech-step-txt{font-family:var(–fb);font-size:0.8rem;color:var(–text);line-height:1.5;}
+.tech-tool-row{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(–border);}
+.tech-tool-label{font-family:var(–fm);font-size:0.52rem;color:var(–dim);letter-spacing:0.1em;}
+.tech-tool-link{font-family:var(–fm);font-size:0.6rem;color:var(–muted);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,0.15);transition:color 0.15s;}
+.tech-tool-link:hover{color:var(–text);}
+.why-box{background:rgba(255,255,255,0.02);border:1px solid var(–border);border-radius:var(–radius);padding:14px 16px;margin-bottom:8px;}
+.why-box-label{font-family:var(–fm);font-size:0.52rem;letter-spacing:0.15em;color:var(–dim);margin-bottom:6px;}
+.why-box-txt{font-family:var(–fb);font-size:0.8rem;color:var(–muted);line-height:1.6;}
+/* MÉTODO */
+.cira-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px;}
+.cira-card{padding:16px 18px;border-radius:var(–radius);border-left:3px solid;background:var(–s1);border-top:1px solid var(–border);border-right:1px solid var(–border);border-bottom:1px solid var(–border);}
+.cira-letter{font-family:var(–fn);font-size:2.5rem;line-height:1;margin-bottom:6px;}
+.cira-word{font-family:var(–fn);font-size:1rem;letter-spacing:0.1em;margin-bottom:6px;}
+.cira-desc{font-family:var(–fb);font-size:0.78rem;color:var(–muted);line-height:1.6;}
+.rules-list{display:flex;flex-direction:column;gap:8px;margin-bottom:28px;}
+.rule-row{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-radius:var(–radius);background:var(–s1);border:1px solid var(–border);}
+.rule-tag{font-family:var(–fm);font-size:0.52rem;letter-spacing:0.08em;font-weight:700;padding:2px 7px;border-radius:3px;flex-shrink:0;margin-top:2px;white-space:nowrap;}
+.rule-txt{font-family:var(–fb);font-size:0.82rem;color:var(–muted);line-height:1.55;}
+.rule-txt strong{color:var(–text);font-weight:600;}
+.hacks-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px;}
+.hack-card{background:var(–s1);border:1px solid var(–border);border-radius:var(–radius);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;transition:border-color 0.2s;}
+.hack-card:hover{border-color:var(–border2);}
+.hack-emoji{font-size:1.4rem;flex-shrink:0;line-height:1;}
+.hack-info{}
+.hack-name{font-family:var(–fb);font-size:0.82rem;font-weight:600;margin-bottom:3px;}
+.hack-desc{font-family:var(–fb);font-size:0.75rem;color:var(–muted);line-height:1.5;}
+.kpi-table{background:var(–s1);border:1px solid var(–border);border-radius:var(–radius);overflow:hidden;margin-bottom:24px;}
+.kpi-row{display:grid;grid-template-columns:80px 1fr 1fr;gap:0;border-bottom:1px solid var(–border);align-items:center;}
+.kpi-row:last-child{border-bottom:none;}
+.kpi-row.header{background:var(–s2);}
+.kpi-cell{padding:11px 16px;font-family:var(–fm);font-size:0.6rem;letter-spacing:0.08em;}
+.kpi-row.header .kpi-cell{color:var(–dim);}
+.kpi-week{color:var(–muted);}
+.kpi-val{color:var(–text);font-size:0.68rem;}
+.pedagogy-alert{background:rgba(212,188,90,0.06);border:1px solid rgba(212,188,90,0.25);border-radius:var(–radius);padding:16px 18px;margin-bottom:24px;}
+.pedagogy-alert-title{font-family:var(–fm);font-size:0.58rem;letter-spacing:0.15em;color:#D4BC5A;margin-bottom:10px;}
+.pedagogy-alert-txt{font-family:var(–fb);font-size:0.82rem;color:var(–muted);line-height:1.65;}
+.pedagogy-alert-txt strong{color:#D4BC5A;}
+@media(max-width:560px){.tech-grid{grid-template-columns:1fr;}.cira-grid{grid-template-columns:1fr;}.hacks-grid{grid-template-columns:1fr;}}
+/* END TÉCNICAS & MÉTODO */
+@media(max-width:560px){.dash-grid{grid-template-columns:1fr;}.week-progress-grid{grid-template-columns:1fr 1fr;}.stats-comparison{grid-template-columns:1fr;}.stats-vs-divider{display:none;}.player-score{font-size:2.4rem;}.war-title{font-size:clamp(2.5rem,10vw,6rem);}}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:#2a2a3a;border-radius:4px;}
+</style>
+
+</head>
+<body>
+
+<div id="loader">
+  <div class="loader-title">ENGLISH WARS</div>
+  <div class="loader-sub">CONECTANDO EN TIEMPO REAL...</div>
+  <div class="loader-bar-wrap"><div class="loader-bar-fill"></div></div>
+  <div class="loader-err" id="loader-err">⚠ Sin conexión — revisa tu internet e intenta de nuevo</div>
+</div>
+
+<div class="bg-layer"></div>
+<div class="grid-decor"></div>
+
+<header>
+  <div class="war-eyebrow">⚔️ THE CHALLENGE · 4 SEMANAS · 60 MIN/DÍA</div>
+  <div class="war-title">ENGLISH WARS</div>
+  <div class="war-sub">TANITO &nbsp;·&nbsp; VS &nbsp;·&nbsp; MARRITO</div>
+  <div class="battle-card-wrap">
+  <div class="battle-card">
+    <div class="player-zone marrito">
+      <div class="player-emoji">🔥</div>
+      <div class="player-name">Marrito</div>
+      <div class="player-score" id="score-m">0</div>
+      <div class="player-pts-label">PUNTOS</div>
+      <div class="player-streak" id="streak-m">0 días seguidos</div>
+    </div>
+    <div class="vs-zone">
+      <div class="vs-text">VS</div>
+      <div class="tug-wrap">
+        <div class="tug-label" id="tug-label">—</div>
+        <div class="tug-bar">
+          <div class="tug-fill-m" id="tug-m" style="width:50%"></div>
+          <div class="tug-fill-t" id="tug-t" style="width:50%"></div>
+          <div class="tug-center"></div>
+        </div>
+      </div>
+      <div class="leader-badge" id="leader-badge">EMPATE</div>
+    </div>
+    <div class="player-zone tanito">
+      <div class="player-emoji">⚡</div>
+      <div class="player-name">Tanito</div>
+      <div class="player-score" id="score-t">0</div>
+      <div class="player-pts-label">PUNTOS</div>
+      <div class="player-streak" id="streak-t">0 días seguidos</div>
+    </div>
+  </div><!-- /battle-card -->
+  </div><!-- /battle-card-wrap -->
+</header>
+
+<!-- BOTTOM NAV (mobile) -->
+
+<div class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <button class="bnav-btn active" data-view="dashboard"><span class="bnav-icon">📊</span><span class="bnav-label">Dashboard</span><div class="bnav-dot"></div></button>
+    <button class="bnav-btn" data-view="activities"><span class="bnav-icon">✅</span><span class="bnav-label">Actividades</span><div class="bnav-dot"></div></button>
+    <button class="bnav-btn" data-view="stats"><span class="bnav-icon">🏆</span><span class="bnav-label">Stats</span><div class="bnav-dot"></div></button>
+    <button class="bnav-btn" data-view="tecnicas"><span class="bnav-icon">⚡</span><span class="bnav-label">Técnicas</span><div class="bnav-dot"></div></button>
+    <button class="bnav-btn" data-view="metodo"><span class="bnav-icon">🧬</span><span class="bnav-label">Método</span><div class="bnav-dot"></div></button>
   </div>
 </div>
 
-<div class="section-label">KPIs SEMANALES · ¿CÓMO SÉ QUE VOY BIEN?</div>
-<div class="kpi-table">
-  <div class="kpi-row header"><div class="kpi-cell" style="color:var(--dim);">SEMANA</div><div class="kpi-cell" style="color:var(--dim);">MÉTRICA MÍNIMA</div><div class="kpi-cell" style="color:var(--dim);">RETO DE CIERRE</div></div>
-  <div class="kpi-row"><div class="kpi-cell kpi-week" style="color:#FF6B35;">S1 · Fonética</div><div class="kpi-cell kpi-val">140 tarjetas en Anki · 44 fonemas reconocidos</div><div class="kpi-cell kpi-val">Audio de 2 min sobre tu rutina diaria</div></div>
-  <div class="kpi-row"><div class="kpi-cell kpi-week" style="color:#38BDF8;">S2 · Vocab</div><div class="kpi-cell kpi-val">280 tarjetas acumuladas · perfil Tandem activo</div><div class="kpi-cell kpi-val">Email de 150 palabras escrito sin traductor</div></div>
-  <div class="kpi-row"><div class="kpi-cell kpi-week" style="color:#D4BC5A;">S3 · Gramática</div><div class="kpi-cell kpi-val">420 tarjetas · 7 unidades de gramática</div><div class="kpi-cell kpi-val">Historia de 3 min en 3 tiempos verbales</div></div>
-  <div class="kpi-row"><div class="kpi-cell kpi-week" style="color:#8AC98A;">S4 · Fluidez</div><div class="kpi-cell kpi-val">560 tarjetas · partner en Tandem activo</div><div class="kpi-cell kpi-val">Debate de 5 min con un nativo real</div></div>
+<div class="sticky-nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" data-view="dashboard">Dashboard</button>
+    <button class="nav-btn" data-view="activities">Actividades</button>
+    <button class="nav-btn" data-view="stats">Estadísticas</button>
+    <button class="nav-btn" data-view="tecnicas">Técnicas</button>
+    <button class="nav-btn" data-view="metodo">Método</button>
+    <div class="nav-spacer"></div>
+    <div class="conn-badge connecting" id="conn-badge"><div class="conn-dot"></div><span id="conn-text">conectando</span></div>
+  </div>
+</div>
+
+<div class="shell">
+
+  <!-- DASHBOARD -->
+
+  <section class="view active" id="view-dashboard">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-top:8px;">
+      <div class="section-label" style="margin:0;">RESUMEN EN VIVO</div>
+      <div class="live-pill"><div class="live-dot"></div>SINCRONIZADO</div>
+    </div>
+
+```
+<div class="view-section accent-m" style="margin-bottom:20px;">
+  <div class="view-section-title"><span style="font-size:1rem;">⚔️</span><span class="view-section-label">Comparativa de jugadores</span></div>
+  <div class="dash-grid">
+    <div class="stat-card marrito">
+      <div class="stat-card-header"><div><div class="stat-player-name">Marrito</div><div style="font-family:var(--fm);font-size:0.53rem;color:var(--muted);">🔥 EL DE FUEGO</div></div><span style="font-size:1.3rem;">🔥</span></div>
+      <div id="stats-rows-m"></div><div class="cat-bars" id="cat-bars-m"></div>
+    </div>
+    <div class="stat-card tanito">
+      <div class="stat-card-header"><div><div class="stat-player-name">Tanito</div><div style="font-family:var(--fm);font-size:0.53rem;color:var(--muted);">⚡ EL DE LA LUZ</div></div><span style="font-size:1.3rem;">⚡</span></div>
+      <div id="stats-rows-t"></div><div class="cat-bars" id="cat-bars-t"></div>
+    </div>
+  </div>
+</div>
+
+<div class="view-section accent-n">
+  <div class="view-section-title"><span style="font-size:1rem;">📅</span><span class="view-section-label">Progreso por semana</span></div>
+  <div class="week-progress-grid" id="week-prog-grid"></div>
+</div>
+
+<div class="section-sep"></div>
+
+<div class="view-section accent-n">
+  <div class="view-section-title"><span style="font-size:1rem;">⚡</span><span class="view-section-label">Últimas actividades</span><div class="live-pill" style="margin-left:auto;"><div class="live-dot"></div>LIVE</div></div>
+  <div id="activity-feed"></div>
+</div>
+
+<div class="view-section accent-n">
+  <div class="view-section-title"><span style="font-size:1rem;">❓</span><span class="view-section-label">Cómo funcionan puntos y racha</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
+      <div style="font-family:var(--fn);font-size:1rem;letter-spacing:0.06em;margin-bottom:10px;">⚡ PUNTOS POR ACTIVIDAD</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;justify-content:space-between;"><span style="font-family:var(--fm);font-size:0.57rem;color:var(--muted);">🏆 Reto semanal</span><span style="font-family:var(--fn);font-size:0.95rem;color:#F87171;">30</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="font-family:var(--fm);font-size:0.57rem;color:var(--muted);">🗣️ Output / hablar</span><span style="font-family:var(--fn);font-size:0.95rem;color:#FF6B35;">15</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="font-family:var(--fm);font-size:0.57rem;color:var(--muted);">🪞 Shadowing</span><span style="font-family:var(--fn);font-size:0.95rem;color:#A78BFA;">15</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="font-family:var(--fm);font-size:0.57rem;color:var(--muted);">📥 Input</span><span style="font-family:var(--fn);font-size:0.95rem;color:#D4BC5A;">12</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="font-family:var(--fm);font-size:0.57rem;color:var(--muted);">⚙️ Técnica</span><span style="font-family:var(--fn);font-size:0.95rem;color:#8AC98A;">12</span></div>
+        <div style="display:flex;justify-content:space-between;"><span style="font-family:var(--fm);font-size:0.57rem;color:var(--muted);">🃏 Anki SRS</span><span style="font-family:var(--fn);font-size:0.95rem;color:#38BDF8;">10</span></div>
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
+      <div style="font-family:var(--fn);font-size:1rem;letter-spacing:0.06em;margin-bottom:8px;">🔥 RACHA DIARIA</div>
+      <div style="font-family:var(--fb);font-size:0.77rem;color:var(--muted);line-height:1.65;margin-bottom:10px;">La racha cuenta <strong style="color:var(--text);">días consecutivos</strong> con al menos <strong style="color:var(--text);">1 actividad</strong> marcada. Cada quien tiene la suya, independiente.</div>
+      <div style="background:rgba(255,107,53,0.06);border:1px solid rgba(255,107,53,0.2);border-radius:7px;padding:10px 12px;">
+        <div style="font-family:var(--fm);font-size:0.52rem;color:#FF6B35;letter-spacing:0.12em;margin-bottom:4px;">¿CÓMO MARCAR?</div>
+        <div style="font-family:var(--fb);font-size:0.75rem;color:var(--muted);line-height:1.5;">Ve a <strong style="color:var(--text);">Actividades</strong> → selecciona tu nombre → marca tus actividades del día. Cada quien en su dispositivo.</div>
+      </div>
+    </div>
+  </div>
 </div>
 ```
 
   </section>
 
-</div>
+  <!-- ACTIVITIES -->
 
-<script>
-/* ═══ FIREBASE ═══ */
-firebase.initializeApp({
-  apiKey:"AIzaSyA-31OgRDk_TfCrUC1zwwbPoqGkiZpmXUY",
-  authDomain:"english-wars-b3cf7.firebaseapp.com",
-  databaseURL:"https://english-wars-b3cf7-default-rtdb.firebaseio.com",
-  projectId:"english-wars-b3cf7",
-  storageBucket:"english-wars-b3cf7.firebasestorage.app",
-  messagingSenderId:"532270204083",
-  appId:"1:532270204083:web:feebacc67c3b237fbedcc6"
-});
-const db = firebase.database();
-const ROOT = 'ew/state';
+  <section class="view" id="view-activities">
+    <div class="section-label" style="padding-top:8px;">¿QUIÉN ESTÁ JUGANDO?</div>
+    <div class="player-toggle">
+      <button class="toggle-btn active-m" id="toggle-m" onclick="setActivePlayer('m')">🔥 Marrito</button>
+      <button class="toggle-btn" id="toggle-t" onclick="setActivePlayer('t')">⚡ Tanito</button>
+    </div>
+    <div class="week-tabs" id="week-tabs"></div>
+    <div id="activities-list"></div>
+  </section>
 
-/* ═══ DATA ═══ */
-const WEEKS_DATA=[
-  {id:1,title:"Fonética & Reseteo",short:"FONÉTICA",color:"#FF6B35",days:[
-    {id:"1-1",label:"DÍA 1",day:"Lunes",acts:[
-      {id:"1-1-1",icon:"🎙️",name:"Diagnóstico de pronunciación",time:"20 min",tag:"OUTPUT",tool:"Speechnotes",url:"https://speechnotes.co",desc:"Grábate diciendo 20 palabras clave. Úsalas como referencia de mejora toda la semana."},
-      {id:"1-1-2",icon:"🃏",name:"Anki — Core 2k deck",time:"20 min",tag:"SRS",tool:"AnkiWeb",url:"https://ankiweb.net",desc:"Instala Anki. Descarga el deck 'Core 2000 English'. Estudia 20 tarjetas nuevas hoy."},
-      {id:"1-1-3",icon:"👂",name:"YouGlish — Fonemas vocales",time:"20 min",tag:"INPUT",tool:"YouGlish",url:"https://youglish.com",desc:"Busca 5 palabras con el sonido /æ/ (cat, bad, man). Observa la boca del hablante. Imita 3 veces."},
-    ]},
-    {id:"1-2",label:"DÍA 2",day:"Martes",acts:[
-      {id:"1-2-1",icon:"🪞",name:"Shadowing — BBC 6 Minute English",time:"20 min",tag:"SHADOWING",tool:"BBC Learning",url:"https://bbc.co.uk/learningenglish/english/features/6-minute-english",desc:"Repite en tiempo real. Imita ritmo, entonación y pausas. Es incómodo. Perfecto."},
-      {id:"1-2-2",icon:"🃏",name:"Anki — Repaso + 20 nuevas",time:"20 min",tag:"SRS",tool:"AnkiWeb",url:"https://ankiweb.net",desc:"Primero repasa las de ayer (el sistema las programa solo). Luego 20 nuevas."},
-      {id:"1-2-3",icon:"📊",name:"Fonética IPA — Chart interactivo",time:"20 min",tag:"INPUT",tool:"IPA Chart",url:"https://www.ipachart.com",desc:"Estudia los 44 fonemas. Foco: /θ/ (think), /ð/ (the), /ŋ/ (sing). Repite 3 veces cada uno."},
-    ]},
-    {id:"1-3",label:"DÍA 3",day:"Miércoles",acts:[
-      {id:"1-3-1",icon:"🎬",name:"TED-Ed — Las 3 pasadas",time:"30 min",tag:"INPUT",tool:"TED-Ed",url:"https://ed.ted.com",desc:"1ª sin subtítulos. 2ª con subtítulos en inglés. 3ª shadowing con el hablante. Anota 5 palabras → Anki."},
-      {id:"1-3-2",icon:"🃏",name:"Anki — Repaso diario",time:"20 min",tag:"SRS",tool:"AnkiWeb",url:"https://ankiweb.net",desc:"Solo repasos. Anki ya sabe qué mostrarte. Confía en el algoritmo."},
-      {id:"1-3-3",icon:"✍️",name:"Diario en inglés — 5 oraciones",time:"10 min",tag:"OUTPUT",tool:"LanguageTool",url:"https://languagetool.org",desc:"Escribe 5 oraciones sobre tu día. Sin traductor. Equivócate. Corrígelo con LanguageTool."},
-    ]},
-    {id:"1-4",label:"DÍA 4",day:"Jueves",acts:[
-      {id:"1-4-1",icon:"🔊",name:"Forvo — Pronunciación nativa",time:"20 min",tag:"INPUT",tool:"Forvo",url:"https://forvo.com",desc:"Busca tus 10 palabras de la semana. Escucha americano y británico. Imita hasta confundirte con el audio."},
-      {id:"1-4-2",icon:"🃏",name:"Anki — Repaso + 20 nuevas",time:"20 min",tag:"SRS",tool:"AnkiWeb",url:"https://ankiweb.net",desc:"Sigue el ritmo. La consistencia supera a la intensidad."},
-      {id:"1-4-3",icon:"🪞",name:"Shadowing — ESLPod",time:"20 min",tag:"SHADOWING",tool:"ESL Podcast",url:"https://www.eslpod.com",desc:"Episodios cortos, habla lenta-media. Shadowing completo de 1 episodio. Si puedes hacer 2, hazlos."},
-    ]},
-    {id:"1-5",label:"DÍA 5",day:"Viernes",acts:[
-      {id:"1-5-1",icon:"🤖",name:"ELSA Speak — IA de pronunciación",time:"25 min",tag:"OUTPUT",tool:"ELSA Speak",url:"https://elsaspeak.com",desc:"La IA detecta exactamente qué fonema fallas. Es brutal. Haz las lecciones de nivel básico."},
-      {id:"1-5-2",icon:"🃏",name:"Anki — Repaso intenso",time:"20 min",tag:"SRS",tool:"AnkiWeb",url:"https://ankiweb.net",desc:"Marca difícil todo lo que dudes. Sin trampa al algoritmo."},
-      {id:"1-5-3",icon:"🌍",name:"HiNative — Feedback de nativos",time:"15 min",tag:"OUTPUT",tool:"HiNative",url:"https://hinative.com",desc:"Graba tu pronunciación de 5 palabras difíciles. Nativos te corrigen gratis."},
-    ]},
-    {id:"1-6",label:"DÍA 6",day:"Sábado",acts:[
-      {id:"1-6-1",icon:"📺",name:"Input libre — Serie en inglés",time:"40 min",tag:"INPUT",tool:"YouTube",url:"https://youtube.com",desc:"20 min con subtítulos en inglés. 20 min SIN subtítulos. No pares cuando no entiendas."},
-      {id:"1-6-2",icon:"🃏",name:"Anki — Repaso semanal",time:"20 min",tag:"SRS",tool:"AnkiWeb",url:"https://ankiweb.net",desc:"Hoy Anki mostrará muchas tarjetas. Completa todo el stack sin saltarte ninguna."},
-    ]},
-    {id:"1-7",label:"DÍA 7 🏆",day:"Domingo — RETO",acts:[
-      {id:"1-7-1",icon:"🏆",name:"RETO: Grábate 2 minutos hablando",time:"15 min",tag:"RETO",tool:"Speechnotes",url:"https://speechnotes.co",desc:"Habla 2 min sobre 'Mi rutina diaria'. Compara con el audio del día 1. Si no hay diferencia, repites la semana."},
-      {id:"1-7-2",icon:"📋",name:"Retrospectiva semanal",time:"20 min",tag:"OUTPUT",tool:"Google Keep",url:"https://keep.google.com",desc:"¿Qué fallé? ¿Qué mejoré? ¿Cuántas tarjetas en Anki? Objetivo: 140 tarjetas nuevas."},
-    ]},
-  ]},
-  {id:2,title:"Vocabulario en Contexto",short:"VOCABULARIO",color:"#38BDF8",days:[
-    {id:"2-1",label:"DÍA 8",day:"Lunes",acts:[
-      {id:"2-1-1",icon:"🃏",name:"Anki — Academic Word List",time:"20 min",tag:"SRS",tool:"AnkiWeb",url:"https://ankiweb.net",desc:"Descarga el deck 'Academic Word List'. Esta semana: emociones, trabajo, tiempo."},
-      {id:"2-1-2",icon:"🕸️",name:"Técnica Word Web",time:"20 min",tag:"TÉCNICA",tool:"Coggle",url:"https://coggle.it",desc:"Toma 1 palabra. Dibuja mapa mental: sinónimos, antónimos, imagen mental, oración. No memorizas palabras, memorizas redes."},
-      {id:"2-1-3",icon:"📰",name:"BBC News — Lectura activa",time:"20 min",tag:"INPUT",tool:"BBC News",url:"https://bbc.com/news",desc:"Lee 1 artículo. Subraya máx 5 palabras. Agrégalas a Anki con la oración completa como contexto."},
-    ]},
-    {id:"2-2",label:"DÍAS 9–11",day:"Martes a Jueves",acts:[
-      {id:"2-2-1",icon:"🃏",name:"Anki diario — sin falta",time:"20 min",tag:"SRS",tool:"AnkiWeb",url:"https://ankiweb.net",desc:"Sagrado. 20 minutos al día. Anki programa todo solo. Tú solo haz clic."},
-      {id:"2-2-2",icon:"🪞",name:"Shadowing + Input alternado",time:"30 min",tag:"SHADOWING",tool:"YouTube TED",url:"https://youtube.com/@TED",desc:"Alterna: martes shadowing BBC, miércoles input YouTube, jueves shadowing TED Talk."},
-      {id:"2-2-3",icon:"🗣️",name:"Speak to yourself — 10 min",time:"10 min",tag:"OUTPUT",tool:"Tu mente",url:null,desc:"Habla solo en inglés 10 min. Describe lo que ves, piensas, planeas. Nadie te escucha."},
-    ]},
-    {id:"2-3",label:"DÍA 12",day:"Viernes",acts:[
-      {id:"2-3-1",icon:"💬",name:"Conversación con IA — 30 min",time:"30 min",tag:"OUTPUT",tool:"Claude.ai",url:"https://claude.ai",desc:"Dile: 'Act as a native English teacher. Correct all my mistakes. Let's talk.' 30 min sin parar."},
-      {id:"2-3-2",icon:"🃏",name:"Anki + revisión de errores",time:"20 min",tag:"SRS",tool:"AnkiWeb",url:"https://ankiweb.net",desc:"Repasa y anota los 5 errores más frecuentes de la conversación con IA."},
-    ]},
-    {id:"2-4",label:"DÍAS 13–14 🏆",day:"Fin de Semana — RETO",acts:[
-      {id:"2-4-1",icon:"🎬",name:"Inmersión de fin de semana",time:"60 min",tag:"INPUT",tool:"YouTube",url:"https://youtube.com",desc:"Sábado: película completa con subtítulos en inglés. Prepara tu email del reto."},
-      {id:"2-4-2",icon:"🏆",name:"RETO: Email de 150 palabras",time:"15 min",tag:"RETO",tool:"LanguageTool",url:"https://languagetool.org",desc:"Escribe el email. Corrígelo con LanguageTool. Pégalo en Claude: 'Make this sound more natural'. Compara."},
-    ]},
-  ]},
-  {id:3,title:"Gramática Funcional",short:"GRAMÁTICA",color:"#D4BC5A",days:[
-    {id:"3-1",label:"TODA LA SEMANA",day:"Estructura diaria",acts:[
-      {id:"3-1-1",icon:"🃏",name:"Anki — Oraciones completas",time:"20 min",tag:"SRS",tool:"AnkiWeb",url:"https://ankiweb.net",desc:"No memorizas reglas. Memorizas oraciones completas: 'I have never eaten sushi / She has already left'. 20/día."},
-      {id:"3-1-2",icon:"📚",name:"Perfect English Grammar — 1 unidad",time:"15 min",tag:"TÉCNICA",tool:"Perfect English Grammar",url:"https://perfect-english-grammar.com",desc:"Foco: Present Simple vs Continuous → Past Simple vs Perfect → Will vs Going to."},
-      {id:"3-1-3",icon:"🪞",name:"Shadowing + detección de tiempos",time:"20 min",tag:"SHADOWING",tool:"BBC Learning",url:"https://bbc.co.uk/learningenglish",desc:"Mientras haces shadowing, cuenta los tiempos verbales distintos que escuchas. Entrena el oído gramatical."},
-      {id:"3-1-4",icon:"📓",name:"Diario de errores — 3 al día",time:"10 min",tag:"OUTPUT",tool:"Google Keep",url:"https://keep.google.com",desc:"Anota 3 errores gramaticales del día. Escribe la versión correcta 3 veces. Método Schmidt: Output Noticing."},
-    ]},
-  ]},
-  {id:4,title:"Fluidez & Pensamiento",short:"FLUIDEZ",color:"#8AC98A",days:[
-    {id:"4-1",label:"TODA LA SEMANA",day:"Estructura diaria",acts:[
-      {id:"4-1-1",icon:"🤝",name:"Tandem — Conversación real",time:"30 min",tag:"OUTPUT",tool:"Tandem",url:"https://tandem.net",desc:"15 min ellos te enseñan inglés, 15 min tú les enseñas español. Sin excusas."},
-      {id:"4-1-2",icon:"🃏",name:"Anki — Phrasal verbs",time:"20 min",tag:"SRS",tool:"AnkiWeb",url:"https://ankiweb.net",desc:"Phrasal verbs en contexto. 'Give up / Give in / Give away / Give out' — no son lo mismo."},
-      {id:"4-1-3",icon:"🧠",name:"Thinking in English",time:"20 min",tag:"TÉCNICA",tool:"Tu mente",url:null,desc:"AVANZADO: Cada pensamiento en español, tradúcelo al inglés INMEDIATAMENTE. Aunque esté mal. Hazlo."},
-      {id:"4-1-4",icon:"🗣️",name:"Shadowing de debates",time:"15 min",tag:"SHADOWING",tool:"YouTube",url:"https://youtube.com/results?search_query=english+debate+practice",desc:"Imita no solo las palabras sino la SEGURIDAD del hablante. El tono importa más de lo que crees."},
-    ]},
-  ]},
-];
+  <!-- STATS -->
 
-const PTS={SRS:10,INPUT:12,OUTPUT:15,SHADOWING:15,TÉCNICA:12,RETO:30};
-const TC={SRS:'#38BDF8',INPUT:'#D4BC5A',OUTPUT:'#FF6B35',SHADOWING:'#A78BFA',TÉCNICA:'#8AC98A',RETO:'#F87171'};
-
-/* ═══ STATE ═══ */
-let STATE={m:{completed:{}},t:{completed:{}}};
-let activePlayer='m', activeWeekIdx=0, openDays={}, initialized=false;
-
-/* ═══ FIREBASE LISTENERS ═══ */
-db.ref(ROOT).on('value',(snap)=>{
-  const v=snap.val()||{};
-  STATE.m=v.m||{completed:{}};
-  STATE.t=v.t||{completed:{}};
-  if(!STATE.m.completed)STATE.m.completed={};
-  if(!STATE.t.completed)STATE.t.completed={};
-  if(!initialized){
-    initialized=true;
-    const loader=document.getElementById('loader');
-    loader.classList.add('hidden');
-    setTimeout(()=>loader.remove(),600);
-  }
-  renderAll();
-},(err)=>{
-  console.error(err);
-  document.getElementById('loader-err').style.display='block';
-});
-
-db.ref('.info/connected').on('value',(snap)=>{
-  const on=snap.val()===true;
-  const b=document.getElementById('conn-badge');
-  const t=document.getElementById('conn-text');
-  b.className=`conn-badge ${on?'online':(initialized?'offline':'connecting')}`;
-  t.textContent=on?'en vivo':(initialized?'sin conexión':'conectando');
-});
-
-setTimeout(()=>{if(!initialized)document.getElementById('loader-err').style.display='block';},10000);
-
-/* ═══ FIREBASE WRITE ═══ */
-function fbCheck(id,p){const n=new Date();return db.ref(`${ROOT}/${p}/completed/${id}`).set({date:n.toISOString().slice(0,10),timestamp:n.getTime()});}
-function fbUncheck(id,p){return db.ref(`${ROOT}/${p}/completed/${id}`).remove();}
-function fbReset(){return db.ref(ROOT).set({m:{completed:{}},t:{completed:{}}});}
-
-/* ═══ COMPUTED ═══ */
-function allActs(){const l=[];WEEKS_DATA.forEach(w=>w.days.forEach(d=>d.acts.forEach(a=>l.push({...a,weekId:w.id,weekColor:w.color}))));return l;}
-
-function getMetrics(p){
-  const comp=STATE[p].completed||{},all=allActs();
-  const done=all.filter(a=>comp[a.id]);
-  const totalPts=done.reduce((s,a)=>s+(PTS[a.tag]||10),0);
-  const cats={};done.forEach(a=>{cats[a.tag]=(cats[a.tag]||0)+1;});
-  const byWeek={};
-  WEEKS_DATA.forEach(w=>{
-    const wa=all.filter(a=>a.weekId===w.id),wd=wa.filter(a=>comp[a.id]);
-    byWeek[w.id]={total:wa.length,done:wd.length,pct:wa.length?Math.round(wd.length/wa.length*100):0};
-  });
-  const dates=new Set();Object.entries(comp).forEach(([,e])=>{if(e&&e.date)dates.add(e.date);});
-  let streak=0;const today=new Date();
-  for(let i=0;i<60;i++){const d=new Date(today);d.setDate(d.getDate()-i);if(dates.has(d.toISOString().slice(0,10)))streak++;else if(i>0)break;}
-  return{totalPts,totalActs:done.length,cats,byWeek,streak,daysActive:dates.size};
-}
-
-/* ═══ RENDER HEADER ═══ */
-const numTimers={};
-function animN(id,target){
-  if(numTimers[id])clearInterval(numTimers[id]);
-  const el=document.getElementById(id);if(!el)return;
-  const start=parseInt(el.textContent)||0;if(start===target)return;
-  let i=0,steps=18;
-  numTimers[id]=setInterval(()=>{i++;el.textContent=Math.round(start+(target-start)*(i/steps));if(i>=steps){el.textContent=target;clearInterval(numTimers[id]);}},16);
-}
-function renderHeader(){
-  const mm=getMetrics('m'),mt=getMetrics('t');
-  animN('score-m',mm.totalPts);animN('score-t',mt.totalPts);
-  document.getElementById('streak-m').textContent=`${mm.streak} día${mm.streak!==1?'s':''} seguido${mm.streak!==1?'s':''}`;
-  document.getElementById('streak-t').textContent=`${mt.streak} día${mt.streak!==1?'s':''} seguido${mt.streak!==1?'s':''}`;
-  const tot=mm.totalPts+mt.totalPts;
-  document.getElementById('tug-m').style.width=(tot>0?mm.totalPts/tot*100:50)+'%';
-  document.getElementById('tug-t').style.width=(tot>0?mt.totalPts/tot*100:50)+'%';
-  const badge=document.getElementById('leader-badge'),lbl=document.getElementById('tug-label');
-  if(mm.totalPts>mt.totalPts){badge.textContent='🔥 MARRITO';badge.style.cssText='background:rgba(255,107,53,0.2);color:var(--M);';lbl.textContent='🔥';}
-  else if(mt.totalPts>mm.totalPts){badge.textContent='⚡ TANITO';badge.style.cssText='background:rgba(56,189,248,0.2);color:var(--T);';lbl.textContent='⚡';}
-  else{badge.textContent='EMPATE';badge.style.cssText='background:rgba(255,255,255,0.06);color:var(--dim);';lbl.textContent='—';}
-}
-
-/* ═══ RENDER DASHBOARD ═══ */
-function renderDashboard(){
-  const all=allActs();
-  ['m','t'].forEach(p=>{
-    const m=getMetrics(p);
-    const rows=[['PUNTOS TOTALES',m.totalPts+' pts'],['ACTIVIDADES',m.totalActs+' completadas'],['RACHA ACTUAL',m.streak+(m.streak===1?' día':' días')],['DÍAS ACTIVOS',m.daysActive+(m.daysActive===1?' día':' días')]];
-    document.getElementById(`stats-rows-${p}`).innerHTML=rows.map(([l,v])=>`<div class="stat-row"><span class="stat-row-label">${l}</span><span class="stat-row-val">${v}</span></div>`).join('');
-    const catOrder=['SRS','INPUT','OUTPUT','SHADOWING','TÉCNICA','RETO'];
-    const catLbls={SRS:'🃏 SRS',INPUT:'📥 Input',OUTPUT:'🗣️ Output',SHADOWING:'🪞 Shadow',TÉCNICA:'⚙️ Técnica',RETO:'🏆 Reto'};
-    document.getElementById(`cat-bars-${p}`).innerHTML=
-      '<div style="font-family:var(--fm);font-size:0.52rem;color:var(--dim);letter-spacing:0.12em;margin-bottom:8px;">POR TIPO</div>'+
-      catOrder.map(cat=>{const cnt=m.cats[cat]||0,maxP=Math.max(all.filter(a=>a.tag===cat).length,1);return`<div class="cat-bar-row"><span class="cat-bar-label">${catLbls[cat]}</span><div class="cat-bar-track"><div class="cat-bar-fill" style="width:${Math.round(cnt/maxP*100)}%;background:${TC[cat]};"></div></div><span class="cat-bar-count">${cnt}</span></div>`;}).join('');
-  });
-  const mm=getMetrics('m'),mt=getMetrics('t');
-  const wN=['S1','S2','S3','S4'],wT=['Fonética','Vocab.','Gramática','Fluidez'];
-  document.getElementById('week-prog-grid').innerHTML=WEEKS_DATA.map((w,i)=>{
-    const wm=mm.byWeek[w.id]||{pct:0},wt2=mt.byWeek[w.id]||{pct:0},maxH=56;
-    return`<div class="week-prog-card"><div class="week-prog-label">${wN[i]}</div><div style="font-family:var(--fm);font-size:0.5rem;color:var(--dim);margin-bottom:6px;">${wT[i]}</div><div class="week-prog-bars"><div class="week-prog-bar" style="height:${Math.max(Math.round(wm.pct/100*maxH),2)}px;background:var(--M);"></div><div class="week-prog-bar" style="height:${Math.max(Math.round(wt2.pct/100*maxH),2)}px;background:var(--T);"></div></div><div class="week-prog-pcts"><span class="week-prog-pct" style="color:var(--M);">${wm.pct}%</span><span class="week-prog-pct" style="color:var(--T);">${wt2.pct}%</span></div></div>`;
-  }).join('');
-  renderFeed();
-}
-function renderFeed(){
-  const all=allActs(),entries=[];
-  ['m','t'].forEach(p=>Object.entries(STATE[p].completed||{}).forEach(([id,e])=>{const act=all.find(a=>a.id===id);if(act&&e)entries.push({player:p,act,ts:e.timestamp||0,date:e.date||'—'});}));
-  entries.sort((a,b)=>b.ts-a.ts);
-  const feed=document.getElementById('activity-feed');
-  if(!entries.length){feed.innerHTML='<div class="feed-empty">AÚN SIN ACTIVIDADES — ¡A TRABAJAR!</div>';return;}
-  feed.innerHTML=entries.slice(0,8).map((e,i)=>{
-    const col=e.player==='m'?'var(--M)':'var(--T)',nm=e.player==='m'?'🔥 Marrito':'⚡ Tanito';
-    return`<div class="feed-item" style="animation-delay:${i*0.04}s"><div class="feed-dot" style="background:${col};box-shadow:0 0 8px ${col};"></div><div class="feed-info"><div class="feed-act-name">${e.act.icon} ${e.act.name}</div><div class="feed-meta">${nm} · ${e.date} · ${e.act.tag}</div></div><div class="feed-pts" style="color:${col};">+${PTS[e.act.tag]||10}</div></div>`;
-  }).join('');
-}
-
-/* ═══ RENDER ACTIVITIES ═══ */
-function setActivePlayer(p){
-  activePlayer=p;
-  document.getElementById('toggle-m').className=`toggle-btn ${p==='m'?'active-m':''}`;
-  document.getElementById('toggle-t').className=`toggle-btn ${p==='t'?'active-t':''}`;
-  renderActivities();
-}
-function renderWeekTabs(){
-  document.getElementById('week-tabs').innerHTML=WEEKS_DATA.map((w,i)=>
-    `<button class="week-tab ${i===activeWeekIdx?'active':''}" onclick="selectWeek(${i})" style="${i===activeWeekIdx?`border-color:${w.color};color:${w.color};background:${w.color}18;`:''}">S${w.id} · ${w.short}</button>`
-  ).join('');
-}
-function selectWeek(i){activeWeekIdx=i;openDays={};renderWeekTabs();renderActivities();}
-function renderActivities(){
-  const week=WEEKS_DATA[activeWeekIdx],comp=STATE[activePlayer].completed||{};
-  const col=activePlayer==='m'?'var(--M)':'var(--T)',cc=activePlayer==='m'?'checked-m':'checked-t';
-  document.getElementById('activities-list').innerHTML=week.days.map((day,di)=>{
-    const doneCnt=day.acts.filter(a=>comp[a.id]).length;
-    const isOpen=openDays[day.id]!==false&&(openDays[day.id]===true||di===0);
-    return`<div class="day-block ${isOpen?'open':''}" id="day-${day.id}">
-      <div class="day-block-header" onclick="toggleDay('${day.id}')">
-        <div class="day-block-left">
-          <span class="day-label-pill" style="background:${week.color}18;color:${week.color};">${day.label}</span>
-          <span class="day-name">${day.day}</span>
-          <span class="day-progress">${doneCnt}/${day.acts.length} ✓</span>
+  <section class="view" id="view-stats">
+    <div class="winner-banner" id="winner-banner" style="margin-top:8px;">
+      <div class="winner-crown" id="winner-crown">🏆</div>
+      <div class="winner-label">ACTUALMENTE LIDERANDO</div>
+      <div class="winner-name" id="winner-name">—</div>
+      <div class="winner-diff" id="winner-diff">0 puntos de ventaja</div>
+    </div>
+    <div class="section-label">ESTADÍSTICAS DETALLADAS</div>
+    <div class="stats-comparison">
+      <div class="stats-player-card">
+        <div class="stats-card-header" style="border-top:3px solid var(--M);background:linear-gradient(135deg,rgba(255,107,53,0.06),transparent);">
+          <div class="stats-card-name" style="color:var(--M);">🔥 Marrito</div>
+          <div class="stats-card-pts" style="color:var(--M);" id="detail-pts-m">0</div>
+          <div class="stats-card-pts-label">PUNTOS TOTALES</div>
         </div>
-        <span class="day-chevron">▶</span>
+        <div class="stats-card-body"><div id="detail-rows-m"></div><div style="margin-top:14px;display:flex;justify-content:center;" id="detail-radar-m"></div></div>
       </div>
-      ${isOpen?`<div class="day-acts">${day.acts.map(act=>{
-        const done=!!comp[act.id],dt=comp[act.id]?.date||'';
-        return`<div class="act-row ${done?'done':''}" onclick="toggleActivity('${act.id}',event)">
-          <div class="act-checkbox ${done?cc:''}" id="cb-${act.id}"><span class="check-icon" style="color:${col};">✓</span></div>
-          <span class="act-icon">${act.icon}</span>
-          <div class="act-info">
-            <div class="act-name">${act.name}</div>
-            <div class="act-desc">${act.desc}</div>
-            <div class="act-meta">
-              <span class="act-tag tag-${act.tag}">${act.tag}</span>
-              <span class="act-time">⏱ ${act.time}</span>
-              ${act.url?`<a class="act-tool" href="${act.url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">↗ ${act.tool}</a>`:`<span class="act-tool">${act.tool}</span>`}
-            </div>
-          </div>
-          ${done?`<div class="act-done-time">${dt}</div>`:''}
-        </div>`;
-      }).join('')}</div>`:''}
-    </div>`;
-  }).join('');
-}
-function toggleDay(id){const el=document.getElementById(`day-${id}`);openDays[id]=el?!el.classList.contains('open'):true;renderActivities();}
-function toggleActivity(id,event){
-  event.stopPropagation();
-  const comp=STATE[activePlayer].completed||{},all=allActs(),act=all.find(a=>a.id===id);
-  if(!act)return;
-  if(comp[id]){fbUncheck(id,activePlayer);}
-  else{fbCheck(id,activePlayer);showToast(`+${PTS[act.tag]||10}`,event.clientX,event.clientY,activePlayer==='m'?'#FF6B35':'#38BDF8');}
-}
-function showToast(txt,x,y,col){const t=document.createElement('div');t.className='pts-toast';t.textContent=txt;t.style.cssText=`left:${x-20}px;top:${y-20}px;color:${col};text-shadow:0 0 20px ${col};`;document.body.appendChild(t);setTimeout(()=>t.remove(),1200);}
+      <div class="stats-vs-divider"><div class="stats-vs-text">VS</div><div style="width:1px;flex:1;background:var(--border);min-height:40px;"></div></div>
+      <div class="stats-player-card">
+        <div class="stats-card-header" style="border-top:3px solid var(--T);background:linear-gradient(135deg,rgba(56,189,248,0.06),transparent);">
+          <div class="stats-card-name" style="color:var(--T);">⚡ Tanito</div>
+          <div class="stats-card-pts" style="color:var(--T);" id="detail-pts-t">0</div>
+          <div class="stats-card-pts-label">PUNTOS TOTALES</div>
+        </div>
+        <div class="stats-card-body"><div id="detail-rows-t"></div><div style="margin-top:14px;display:flex;justify-content:center;" id="detail-radar-t"></div></div>
+      </div>
+    </div>
+    <div class="section-label">COMPARATIVA SEMANA A SEMANA</div>
+    <div class="weeks-breakdown">
+      <div class="weeks-breakdown-header"><div class="feed-title" style="display:flex;justify-content:space-between;"><span>SEMANA</span><span style="display:flex;gap:20px;"><span style="color:var(--M);">🔥 Marrito</span><span style="color:var(--T);">⚡ Tanito</span></span></div></div>
+      <div id="weeks-compare"></div>
+    </div>
+    <div class="reset-zone"><button class="reset-btn" onclick="confirmReset()">⚠ Reiniciar todo el progreso</button></div>
+  </section>
 
-/* ═══ RENDER STATS ═══ */
-function renderStats(){
-  const mm=getMetrics('m'),mt=getMetrics('t');
-  const banner=document.getElementById('winner-banner'),wn=document.getElementById('winner-name'),wd=document.getElementById('winner-diff'),wc=document.getElementById('winner-crown');
-  if(mm.totalPts>mt.totalPts){banner.className='winner-banner leading-m';wn.textContent='🔥 Marrito';wn.style.color='var(--M)';wd.textContent=`${mm.totalPts-mt.totalPts} puntos de ventaja`;wc.textContent='🏆';}
-  else if(mt.totalPts>mm.totalPts){banner.className='winner-banner leading-t';wn.textContent='⚡ Tanito';wn.style.color='var(--T)';wd.textContent=`${mt.totalPts-mm.totalPts} puntos de ventaja`;wc.textContent='🏆';}
-  else{banner.className='winner-banner';wn.textContent='EMPATE';wn.style.color='var(--muted)';wd.textContent='los dos en el mismo nivel';wc.textContent='🤝';}
-  document.getElementById('detail-pts-m').textContent=mm.totalPts;
-  document.getElementById('detail-pts-t').textContent=mt.totalPts;
-  ['m','t'].forEach(p=>{
-    const m=p==='m'?mm:mt;
-    const rows=[['Actividades',m.totalActs],['Racha actual',`${m.streak} día${m.streak!==1?'s':''}`],['Días activos',m.daysActive],['Retos completados',m.cats['RETO']||0],['Sesiones Anki',m.cats['SRS']||0],['Shadowing',m.cats['SHADOWING']||0]];
-    document.getElementById(`detail-rows-${p}`).innerHTML=rows.map(([l,v])=>`<div class="stats-row"><span class="stats-row-label">${l}</span><span class="stats-row-val">${v}</span></div>`).join('');
-    document.getElementById(`detail-radar-${p}`).innerHTML=buildRadar(m,p);
-  });
-  document.getElementById('weeks-compare').innerHTML=WEEKS_DATA.map(w=>{
-    const wm=mm.byWeek[w.id]||{pct:0,done:0,total:0},wt=mt.byWeek[w.id]||{pct:0,done:0,total:0};
-    return`<div class="week-compare-row"><span class="week-compare-label">S${w.id}</span><div class="week-compare-bars"><div class="week-compare-bar-row"><div class="week-compare-bar-track"><div class="week-compare-bar-fill" style="width:${wm.pct}%;background:var(--M);"></div></div><span class="week-compare-pct" style="color:var(--M);">${wm.pct}%</span></div><div class="week-compare-bar-row"><div class="week-compare-bar-track"><div class="week-compare-bar-fill" style="width:${wt.pct}%;background:var(--T);"></div></div><span class="week-compare-pct" style="color:var(--T);">${wt.pct}%</span></div></div><div style="font-family:var(--fm);font-size:0.54rem;color:var(--muted);text-align:right;"><div style="color:var(--M);">${wm.done}/${wm.total}</div><div style="color:var(--T);">${wt.done}/${wt.total}</div></div></div>`;
-  }).join('');
-}
-function buildRadar(metrics,player){
-  const col=player==='m'?'#FF6B35':'#38BDF8';
-  const cats=['SRS','INPUT','OUTPUT','SHADOWING','TÉCNICA','RETO'],lbs=['Anki','Input','Output','Shadow','Técnica','Reto'];
-  const n=cats.length,cx=70,cy=70,r=50,all=allActs();
-  const maxP={};cats.forEach(c=>{maxP[c]=Math.max(all.filter(a=>a.tag===c).length,1);});
-  const ang=i=>i/n*Math.PI*2-Math.PI/2,pt=(i,rad)=>`${cx+Math.cos(ang(i))*rad},${cy+Math.sin(ang(i))*rad}`;
-  const rings=[0.25,0.5,0.75,1].map(f=>`<polygon points="${cats.map((_,i)=>pt(i,r*f)).join(' ')}" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>`).join('');
-  const axes=cats.map((_,i)=>`<line x1="${cx}" y1="${cy}" x2="${cx+Math.cos(ang(i))*r}" y2="${cy+Math.sin(ang(i))*r}" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>`).join('');
-  const vals=cats.map(c=>Math.min((metrics.cats[c]||0)/maxP[c],1));
-  const labelHtml=cats.map((c,i)=>{const a=ang(i),lx=cx+Math.cos(a)*(r+16),ly=cy+Math.sin(a)*(r+16);return`<text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle" font-family="Space Mono" font-size="7" fill="${TC[c]}" opacity="0.9">${lbs[i]}</text>`;}).join('');
-  return`<svg width="140" height="140" viewBox="0 0 140 140">${rings}${axes}<polygon points="${vals.map((v,i)=>pt(i,r*v)).join(' ')}" fill="${col}" fill-opacity="0.15" stroke="${col}" stroke-width="1.5"/>${vals.map((v,i)=>`<circle cx="${cx+Math.cos(ang(i))*r*v}" cy="${cy+Math.sin(ang(i))*r*v}" r="3" fill="${col}"/>`).join('')}${labelHtml}</svg>`;
-}
+  <!-- TÉCNICAS -->
 
-/* ═══ NAV ═══ */
-function renderAll(){renderHeader();renderDashboard();renderWeekTabs();renderActivities();renderStats();}
-document.querySelectorAll('.nav-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(`view-${btn.dataset.view}`).classList.add('active');
-  });
-});
-function confirmReset(){
-  if(confirm('¿Seguro que quieres borrar TODO el progreso de los dos?')){
-    if(confirm('⚠️ ÚLTIMA OPORTUNIDAD: Se borrará el progreso de Marrito Y Tanito para siempre.')){fbReset();}
-  }
-}
-</script>
+  <section class="view" id="view-tecnicas">
+    <div class="pedagogy-alert" style="margin-top:8px;">
+      <div class="pedagogy-alert-title">⚡ REVISIÓN PEDAGÓGICA DEL PLAN — CORRECCIONES APLICADAS</div>
+      <div class="pedagogy-alert-txt">
+        El plan es <strong>sólido en un 90%</strong>. Después de revisarlo como experto, hice 3 ajustes clave que ya están aplicados en las actividades:<br><br>
+        <strong>✅ Lo que está perfecto:</strong> Empezar con fonética es correcto — la mayoría lo omite y lo paga caro. Anki desde el día 1 es no-negociable y está bien. Shadowing desde el día 1 también correcto.<br><br>
+        <strong>⚠️ Corrección 1:</strong> Gramática no debe ser solo de semana 3. Durante el shadowing de semanas 1–2, debes <strong>observar activamente los tiempos verbales</strong> que escuchas. La adquisición pasiva de gramática funciona en paralelo desde el inicio.<br><br>
+        <strong>⚠️ Corrección 2:</strong> No esperen a semana 4 para buscar un partner en Tandem. <strong>Creen su perfil en semana 1 y empiecen a buscar en semana 2</strong>. Los buenos partners tardan en aparecer.<br><br>
+        <strong>⚠️ Corrección 3:</strong> "Thinking in English" no es técnica de semana 4. <strong>Empiécenlo desde el día 1</strong>, aunque sean solo 5 pensamientos por día. Es el hábito más transformador de todos y necesita tiempo para arraigarse.
+      </div>
+    </div>
 
-</body>
-</html>
+```
+<div class="section-label">LAS 6 TÉCNICAS DEL MÉTODO · BASE CIENTÍFICA</div>
+<div class="tech-grid">
+
+  <!-- Shadowing -->
+  <div class="tech-card">
+    <div class="tech-card-header" style="border-top:3px solid #A78BFA;">
+      <div class="tech-icon">🪞</div>
+      <div class="tech-name" style="color:#A78BFA;">Shadowing</div>
+      <div class="tech-author">Dr. Alexander Argüelles · políglota de 36 idiomas</div>
+      <div class="tech-time-badge" style="background:rgba(167,139,250,0.12);color:#A78BFA;">⏱ 20–30 min / día</div>
+    </div>
+    <div class="tech-body">
+      <div class="tech-desc">Repites en tiempo real lo que escuchas en un audio nativo — sin pausar, sin traducir. Tu cerebro imita ritmo, velocidad, entonación y pronunciación al mismo tiempo. Es la técnica más poderosa para destruir el acento y adquirir el flujo natural del idioma.</div>
+      <div class="why-box"><div class="why-box-label">POR QUÉ FUNCIONA</div><div class="why-box-txt">Activa simultáneamente la memoria fonológica, motora y auditiva. El cerebro no puede "pensar en español" mientras hace shadowing — te fuerza a procesar en inglés.</div></div>
+      <div class="tech-steps-label">PROTOCOLO EXACTO</div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#A78BFA;color:#0F0F1C;">1</div><div class="tech-step-txt">Elige audio con velocidad moderada — BBC 6 Minute English o ESLPod para empezar</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#A78BFA;color:#0F0F1C;">2</div><div class="tech-step-txt">Pon los subtítulos en inglés (nunca en español)</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#A78BFA;color:#0F0F1C;">3</div><div class="tech-step-txt">Habla exactamente al mismo tiempo que el audio. No pares aunque te equivoques — el flujo es sagrado</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#A78BFA;color:#0F0F1C;">4</div><div class="tech-step-txt">Grábate una vez por semana. La comparativa es tu prueba real de progreso</div></div>
+      <div class="tech-tool-row">
+        <span class="tech-tool-label">HERRAMIENTAS:</span>
+        <a class="tech-tool-link" href="https://bbc.co.uk/learningenglish/english/features/6-minute-english" target="_blank">BBC 6 Min ↗</a>
+        <a class="tech-tool-link" href="https://www.eslpod.com" target="_blank">ESLPod ↗</a>
+        <a class="tech-tool-link" href="https://youglish.com" target="_blank">YouGlish ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Spaced Repetition -->
+  <div class="tech-card">
+    <div class="tech-card-header" style="border-top:3px solid #38BDF8;">
+      <div class="tech-icon">🃏</div>
+      <div class="tech-name" style="color:#38BDF8;">Repetición Espaciada</div>
+      <div class="tech-author">Hermann Ebbinghaus · curva del olvido (1885)</div>
+      <div class="tech-time-badge" style="background:rgba(56,189,248,0.12);color:#38BDF8;">⏱ 20 min exactos / día</div>
+    </div>
+    <div class="tech-body">
+      <div class="tech-desc">Anki calcula el momento exacto en que vas a olvidar una tarjeta y te la muestra justo antes. Resultado: máxima retención con el mínimo tiempo posible. Está comprobado que supera cualquier método de estudio tradicional por factores de 3x a 5x.</div>
+      <div class="why-box"><div class="why-box-label">POR QUÉ FUNCIONA</div><div class="why-box-txt">La memoria se consolida cuando recuerdas algo en el momento justo antes de olvidarlo. El espaciado óptimo hace que cada repaso sea más eficiente que el anterior.</div></div>
+      <div class="tech-steps-label">PROTOCOLO EXACTO</div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#38BDF8;color:#0F0F1C;">1</div><div class="tech-step-txt">Crea tarjetas con <strong>oraciones completas</strong>, nunca palabras solas. "I haven't eaten yet" no "yet"</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#38BDF8;color:#0F0F1C;">2</div><div class="tech-step-txt">Máximo 20 tarjetas nuevas por día. Ni 19 ni 21. El sistema se desborda con más</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#38BDF8;color:#0F0F1C;">3</div><div class="tech-step-txt">Hazlo TODOS los días sin excepción. Si fallas un día, los repasos se acumulan y el sistema colapsa</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#38BDF8;color:#0F0F1C;">4</div><div class="tech-step-txt">Sé honesto: si dudas aunque sea un segundo, presiona "Hard". Sin trampa al algoritmo</div></div>
+      <div class="tech-tool-row">
+        <span class="tech-tool-label">HERRAMIENTA:</span>
+        <a class="tech-tool-link" href="https://ankiweb.net" target="_blank">AnkiWeb (gratis) ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input Comprensible -->
+  <div class="tech-card">
+    <div class="tech-card-header" style="border-top:3px solid #D4BC5A;">
+      <div class="tech-icon">📥</div>
+      <div class="tech-name" style="color:#D4BC5A;">Input Comprensible i+1</div>
+      <div class="tech-author">Dr. Stephen Krashen · hipótesis de adquisición (1982)</div>
+      <div class="tech-time-badge" style="background:rgba(212,188,90,0.12);color:#D4BC5A;">⏱ 30–60 min / día</div>
+    </div>
+    <div class="tech-body">
+      <div class="tech-desc">Aprendes mejor cuando el input que consumes es casi completamente comprensible pero contiene un 5–10% de elementos nuevos. La zona "i+1" (tu nivel + 1 escalón) es donde ocurre la adquisición real. Ni muy fácil (aburrimiento) ni muy difícil (frustración).</div>
+      <div class="why-box"><div class="why-box-label">POR QUÉ FUNCIONA</div><div class="why-box-txt">El cerebro adquiere idiomas de forma natural cuando puede inferir el significado por contexto. No necesitas entender cada palabra — necesitas entender suficiente para que el resto tenga sentido.</div></div>
+      <div class="tech-steps-label">PROTOCOLO EXACTO</div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#D4BC5A;color:#0F0F1C;">1</div><div class="tech-step-txt">Elige contenido donde entiendes el 85–90% (semana 1: BBC, semana 3–4: series reales)</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#D4BC5A;color:#0F0F1C;">2</div><div class="tech-step-txt">No pares por cada palabra desconocida. Usa el contexto para inferir — igual que lo hiciste con el español de niño</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#D4BC5A;color:#0F0F1C;">3</div><div class="tech-step-txt">Solo busca las palabras que aparecen 3+ veces en el mismo contenido (señal de que son importantes)</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#D4BC5A;color:#0F0F1C;">4</div><div class="tech-step-txt">Añade esas palabras a Anki con la oración completa donde las encontraste como contexto</div></div>
+      <div class="tech-tool-row">
+        <span class="tech-tool-label">HERRAMIENTAS:</span>
+        <a class="tech-tool-link" href="https://ed.ted.com" target="_blank">TED-Ed ↗</a>
+        <a class="tech-tool-link" href="https://bbc.com/news" target="_blank">BBC News ↗</a>
+        <a class="tech-tool-link" href="https://youtube.com" target="_blank">YouTube ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Output Forzado -->
+  <div class="tech-card">
+    <div class="tech-card-header" style="border-top:3px solid #FF6B35;">
+      <div class="tech-icon">🗣️</div>
+      <div class="tech-name" style="color:#FF6B35;">Output Forzado</div>
+      <div class="tech-author">Merrill Swain · hipótesis del output (1985)</div>
+      <div class="tech-time-badge" style="background:rgba(255,107,53,0.12);color:#FF6B35;">⏱ 10–30 min / día</div>
+    </div>
+    <div class="tech-body">
+      <div class="tech-desc">Hablar y escribir desde el día 1, aunque sea horrible. El output fuerza al cerebro a construir estructuras activas (producción), no solo pasivas (reconocimiento). Sin output, puedes entender perfectamente y no poder decir nada. El error es información valiosa, no fracaso.</div>
+      <div class="why-box"><div class="why-box-label">POR QUÉ FUNCIONA</div><div class="why-box-txt">El input solo no es suficiente. Cuando intentas hablar, tu cerebro detecta los "huecos" entre lo que quieres decir y lo que puedes decir. Esos huecos son exactamente lo que necesitas aprender.</div></div>
+      <div class="tech-steps-label">PROTOCOLO EXACTO</div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#FF6B35;color:#0F0F1C;">1</div><div class="tech-step-txt">Habla solo en inglés 10 min al día describiendo lo que ves, piensas o planeas (semana 1)</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#FF6B35;color:#0F0F1C;">2</div><div class="tech-step-txt">Usa Claude.ai como interlocutor: "Act as a native teacher. Correct all my mistakes. Let's talk about [tema]."</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#FF6B35;color:#0F0F1C;">3</div><div class="tech-step-txt">Escribe un diario en inglés — 5 oraciones mínimo por día. Sin diccionario en el primer borrador</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#FF6B35;color:#0F0F1C;">4</div><div class="tech-step-txt">Busca partner en Tandem desde semana 1 (crear perfil) y empieza conversaciones en semana 2–3</div></div>
+      <div class="tech-tool-row">
+        <span class="tech-tool-label">HERRAMIENTAS:</span>
+        <a class="tech-tool-link" href="https://claude.ai" target="_blank">Claude.ai ↗</a>
+        <a class="tech-tool-link" href="https://tandem.net" target="_blank">Tandem ↗</a>
+        <a class="tech-tool-link" href="https://languagetool.org" target="_blank">LanguageTool ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Word Web -->
+  <div class="tech-card">
+    <div class="tech-card-header" style="border-top:3px solid #8AC98A;">
+      <div class="tech-icon">🕸️</div>
+      <div class="tech-name" style="color:#8AC98A;">Word Web</div>
+      <div class="tech-author">Técnica de redes semánticas · Psicología cognitiva</div>
+      <div class="tech-time-badge" style="background:rgba(138,201,138,0.12);color:#8AC98A;">⏱ 15–20 min / palabra</div>
+    </div>
+    <div class="tech-body">
+      <div class="tech-desc">En lugar de memorizar palabras aisladas, construyes una red de significado alrededor de cada una. Una sola palabra se convierte en 8–10 conexiones que tu cerebro puede recuperar desde múltiples ángulos. Las redes semánticas son hasta 4x más difíciles de olvidar que las listas.</div>
+      <div class="why-box"><div class="why-box-label">POR QUÉ FUNCIONA</div><div class="why-box-txt">La memoria funciona por asociación, no por posición en una lista. Cuantas más conexiones tiene una palabra en tu cerebro, más fácil es recuperarla cuando la necesitas.</div></div>
+      <div class="tech-steps-label">PROTOCOLO EXACTO</div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#8AC98A;color:#0F0F1C;">1</div><div class="tech-step-txt">Escoge 1 palabra nueva. Ponla en el centro del mapa</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#8AC98A;color:#0F0F1C;">2</div><div class="tech-step-txt">Añade ramas: sinónimos, antónimos, collocations (palabras que van juntas), ejemplo en oración</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#8AC98A;color:#0F0F1C;">3</div><div class="tech-step-txt">Añade una imagen mental asociada y una historia breve o recuerdo personal que use esa palabra</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#8AC98A;color:#0F0F1C;">4</div><div class="tech-step-txt">La oración que crees, agrégala a Anki como tarjeta. Un mapa = una tarjeta completa</div></div>
+      <div class="tech-tool-row">
+        <span class="tech-tool-label">HERRAMIENTA:</span>
+        <a class="tech-tool-link" href="https://coggle.it" target="_blank">Coggle (mapas mentales gratis) ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thinking in English -->
+  <div class="tech-card">
+    <div class="tech-card-header" style="border-top:3px solid #F87171;">
+      <div class="tech-icon">🧠</div>
+      <div class="tech-name" style="color:#F87171;">Thinking in English</div>
+      <div class="tech-author">Técnica avanzada · Procesamiento en L2</div>
+      <div class="tech-time-badge" style="background:rgba(248,113,113,0.12);color:#F87171;">⏱ Todo el día · 0 min extra</div>
+    </div>
+    <div class="tech-body">
+      <div class="tech-desc">Cada vez que tienes un pensamiento en español, lo traduces al inglés inmediatamente en tu mente. No importa si está mal. Lo haces. Al principio es 5 pensamientos al día. En semana 4 son cientos. Este hábito es el que separa a los que "aprenden inglés" de los que "piensan en inglés".</div>
+      <div class="why-box"><div class="why-box-label">POR QUÉ FUNCIONA</div><div class="why-box-txt">La fluidez real ocurre cuando el inglés bypasea el español. Mientras traduces, siempre habrá un delay. El objetivo es pensar directamente en inglés — y solo se logra practicándolo conscientemente hasta que se vuelve automático.</div></div>
+      <div class="tech-steps-label">PROTOCOLO EXACTO</div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#F87171;color:#0F0F1C;">1</div><div class="tech-step-txt"><strong>Semana 1:</strong> Al despertar di en inglés 5 cosas que planeas hacer ese día</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#F87171;color:#0F0F1C;">2</div><div class="tech-step-txt"><strong>Semana 2:</strong> Cuando caminas, conduces o estás en el baño, describe en inglés lo que estás haciendo o viendo</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#F87171;color:#0F0F1C;">3</div><div class="tech-step-txt"><strong>Semana 3:</strong> Cuando tengas un pensamiento complejo (planes, emociones, opiniones), exprésalo en inglés antes de "resolverlo"</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#F87171;color:#0F0F1C;">4</div><div class="tech-step-txt"><strong>Semana 4:</strong> Meta — pasar al menos 30 minutos de tu día pensando activamente en inglés sin esfuerzo consciente</div></div>
+      <div class="tech-tool-row"><span class="tech-tool-label">HERRAMIENTA:</span><span style="font-family:var(--fm);font-size:0.6rem;color:var(--dim);">Solo tu mente. No hay app para esto.</span></div>
+    </div>
+  </div>
+
+  <!-- Gemini Live -->
+  <div class="tech-card">
+    <div class="tech-card-header" style="border-top:3px solid #4285F4;">
+      <div class="tech-icon">🎙️</div>
+      <div class="tech-name" style="color:#4285F4;">Gemini Live</div>
+      <div class="tech-author">Google · IA conversacional en tiempo real · ilimitado y gratis</div>
+      <div class="tech-time-badge" style="background:rgba(66,133,244,0.12);color:#4285F4;">⏱ 15–30 min / sesión</div>
+    </div>
+    <div class="tech-body">
+      <div class="tech-desc">Conversación de voz en tiempo real con IA. A diferencia de un chatbot de texto, Gemini Live procesa tu voz, responde al instante y puede corregirte en el flujo natural de la conversación — igual que hablarías con un tutor. Sin límite de mensajes, disponible 24/7, sin miedo al juicio humano.</div>
+      <div class="why-box"><div class="why-box-label">GEMINI LIVE VS TANDEM — ¿CUÁNDO USAR CADA UNO?</div><div class="why-box-txt"><strong style="color:#4285F4;">Gemini Live:</strong> práctica diaria sin fricción. Para calentar, corregir gramática en tiempo real, hacer roleplays, debatir. Perfecto para semanas 1–3 cuando todavía da vergüenza hablar con un humano.<br><br><strong style="color:#38BDF8;">Tandem:</strong> conversación real con humano. Imprevisibilidad, cultura, modismos auténticos, el nervio de hablar con alguien de verdad. Insustituible en semana 3–4 para el salto final a la fluidez.</div></div>
+      <div class="tech-steps-label">PROMPTS QUE FUNCIONAN</div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#4285F4;color:#fff;">1</div><div class="tech-step-txt"><strong>Modo corrección:</strong> "Act as a strict English teacher. After every sentence I say, correct grammar and vocabulary. Explain each mistake briefly."</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#4285F4;color:#fff;">2</div><div class="tech-step-txt"><strong>Modo conversación:</strong> "Let's have a natural conversation about [tema]. Speak naturally but stop me if I say something that sounds unnatural."</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#4285F4;color:#fff;">3</div><div class="tech-step-txt"><strong>Modo roleplay:</strong> "Let's do a roleplay: you're [personaje]. Stay in character. Correct my English only after the scene ends."</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#4285F4;color:#fff;">4</div><div class="tech-step-txt"><strong>Modo debate:</strong> "Debate me on [tema]. Take the opposite side of whatever I say. Don't let me off the hook — push back hard."</div></div>
+      <div class="tech-tool-row">
+        <span class="tech-tool-label">HERRAMIENTA:</span>
+        <a class="tech-tool-link" href="https://gemini.google.com" target="_blank">Gemini Live — Google (gratis) ↗</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tech-grid -->
+```
+
+  </section>
+
+  <!-- MÉTODO -->
+
+  <section class="view" id="view-metodo">
+    <div style="padding-top:8px;margin-bottom:24px;">
+      <div class="section-label">EL SISTEMA · MÉTODO C.I.R.A.</div>
+      <div style="font-family:var(--fm);font-size:0.6rem;color:var(--muted);letter-spacing:0.1em;margin-bottom:16px;">CHALLENGE · INPUT · REPETICIÓN · ACTIVACIÓN</div>
+      <div class="cira-grid">
+        <div class="cira-card" style="border-left-color:#FF6B35;">
+          <div class="cira-letter" style="color:#FF6B35;">C</div>
+          <div class="cira-word" style="color:#FF6B35;">Challenge</div>
+          <div class="cira-desc">Cada semana termina con un reto real y medible. Si no lo superas, repites. Sin excepciones. El reto es la prueba de que el trabajo fue real, no solo intención.</div>
+        </div>
+        <div class="cira-card" style="border-left-color:#D4BC5A;">
+          <div class="cira-letter" style="color:#D4BC5A;">I</div>
+          <div class="cira-word" style="color:#D4BC5A;">Input</div>
+          <div class="cira-desc">Inmersión mínima de 1 hora diaria en inglés auténtico (podcasts, series, artículos). Tu cerebro necesita materia prima para construir el idioma. Sin input, no hay adquisición.</div>
+        </div>
+        <div class="cira-card" style="border-left-color:#38BDF8;">
+          <div class="cira-letter" style="color:#38BDF8;">R</div>
+          <div class="cira-word" style="color:#38BDF8;">Repetición</div>
+          <div class="cira-desc">Anki, 20 minutos exactos, todos los días. El sistema SRS es el único método con respaldo científico masivo para retención de vocabulario a largo plazo. No se negocia.</div>
+        </div>
+        <div class="cira-card" style="border-left-color:#8AC98A;">
+          <div class="cira-letter" style="color:#8AC98A;">A</div>
+          <div class="cira-word" style="color:#8AC98A;">Activación</div>
+          <div class="cira-desc">Output desde el día 1. Hablar, escribir, cometer errores. El error es datos. El silencio es miedo. Sin producción activa, el inglés se queda en pasivo para siempre.</div>
+        </div>
+      </div>
+    </div>
+
+```
+<div class="section-label">REGLAS DE ORO · INQUEBRANTABLES</div>
+<div class="rules-list">
+  <div class="rule-row"><span class="rule-tag" style="background:rgba(248,113,113,0.15);color:#F87171;">🔴 CRÍTICO</span><div class="rule-txt"><strong>Anki todos los días, sin excepción.</strong> Si fallas un día, los repasos se acumulan. Si fallas tres, el sistema ya está roto y recuperarlo tarda semanas. Es el único hábito que no tiene día libre.</div></div>
+  <div class="rule-row"><span class="rule-tag" style="background:rgba(248,113,113,0.15);color:#F87171;">🔴 CRÍTICO</span><div class="rule-txt"><strong>Output desde el día 1.</strong> Habla aunque sea horrible. Escribe aunque esté mal. El silencio no es modestia, es miedo disfrazado. El error es tu mejor profesor.</div></div>
+  <div class="rule-row"><span class="rule-tag" style="background:rgba(248,113,113,0.15);color:#F87171;">🔴 CRÍTICO</span><div class="rule-txt"><strong>Empezar Thinking in English desde hoy.</strong> No es técnica de semana 4. Empieza con 5 pensamientos mañana. El hábito necesita 4 semanas para arraigarse — si empiezas en semana 4 ya no hay semana 4.</div></div>
+  <div class="rule-row"><span class="rule-tag" style="background:rgba(212,188,90,0.15);color:#D4BC5A;">🟡 REGLA</span><div class="rule-txt"><strong>Nunca uses el español como muleta.</strong> Si no sabes una palabra, usa otra en inglés. Describe, rodea el concepto, gesticula. No saltes al español. Ese salto destruye el flujo.</div></div>
+  <div class="rule-row"><span class="rule-tag" style="background:rgba(212,188,90,0.15);color:#D4BC5A;">🟡 REGLA</span><div class="rule-txt"><strong>20 tarjetas nuevas por día en Anki — ni una más.</strong> La tentación de hacer 40 un día bueno es un error. El algoritmo está calibrado para 20. Más tarjetas = más repasos futuros = colapso del sistema.</div></div>
+  <div class="rule-row"><span class="rule-tag" style="background:rgba(212,188,90,0.15);color:#D4BC5A;">🟡 REGLA</span><div class="rule-txt"><strong>Crea tu perfil en Tandem esta semana.</strong> No esperes a semana 4. Los buenos language partners tardan en aparecer. Empieza a buscar ahora, estarán listos cuando los necesites.</div></div>
+  <div class="rule-row"><span class="rule-tag" style="background:rgba(138,201,138,0.15);color:#8AC98A;">🟢 CONSEJO</span><div class="rule-txt"><strong>Si fallas una semana, no reseteas — continúas.</strong> El progreso no es lineal. La rendición sí. Continuar imperfectamente siempre supera a empezar de nuevo.</div></div>
+  <div class="rule-row"><span class="rule-tag" style="background:rgba(138,201,138,0.15);color:#8AC98A;">🟢 CONSEJO</span><div class="rule-txt"><strong>Consistencia &gt; Intensidad.</strong> 60 minutos diarios durante 28 días supera a un maratón de 8 horas un fin de semana. Siempre.</div></div>
+</div>
