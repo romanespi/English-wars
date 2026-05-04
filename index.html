@@ -379,7 +379,7 @@ header{position:relative;z-index:1;text-align:center;padding:40px 20px 0;}
     <button class="nav-btn" data-view="tecnicas">Técnicas</button>
     <button class="nav-btn" data-view="metodo">Método</button>
     <div class="nav-spacer"></div>
-    <div class="conn-badge connecting" id="conn-badge"><div class="conn-dot"></div><span id="conn-text">conectando</span></div>
+    <div class="conn-badge offline" id="conn-badge"><div class="conn-dot"></div><span id="conn-text">sin conexión</span></div>
   </div>
 </div>
 
@@ -668,7 +668,7 @@ header{position:relative;z-index:1;text-align:center;padding:40px 20px 0;}
       <div class="tech-desc">Conversación de voz en tiempo real con IA. A diferencia de un chatbot de texto, Gemini Live procesa tu voz, responde al instante y puede corregirte en el flujo natural de la conversación — igual que hablarías con un tutor. Sin límite de mensajes, disponible 24/7, sin miedo al juicio humano.</div>
       <div class="why-box"><div class="why-box-label">GEMINI LIVE VS TANDEM — ¿CUÁNDO USAR CADA UNO?</div><div class="why-box-txt"><strong style="color:#4285F4;">Gemini Live:</strong> práctica diaria sin fricción. Para calentar, corregir gramática en tiempo real, hacer roleplays, debatir. Perfecto para semanas 1–3 cuando todavía da vergüenza hablar con un humano.<br><br><strong style="color:#38BDF8;">Tandem:</strong> conversación real con humano. Imprevisibilidad, cultura, modismos auténticos, el nervio de hablar con alguien de verdad. Insustituible en semana 3–4 para el salto final a la fluidez.</div></div>
       <div class="tech-steps-label">PROMPTS QUE FUNCIONAN</div>
-      <div class="tech-step"><div class="tech-step-num" style="background:#4285F4;color:#fff;">1</div><div class="tech-step-txt"><strong>Modo corrección:</strong> "Act as a strict English teacher. After every sentence I say, correct grammar and vocabulary.Explain each mistake briefly."</div></div>
+      <div class="tech-step"><div class="tech-step-num" style="background:#4285F4;color:#fff;">1</div><div class="tech-step-txt"><strong>Modo corrección:</strong> "Act as a strict English teacher. After every sentence I say, correct grammar and vocabulary. Explain each mistake briefly."</div></div>
       <div class="tech-step"><div class="tech-step-num" style="background:#4285F4;color:#fff;">2</div><div class="tech-step-txt"><strong>Modo conversación:</strong> "Let's have a natural conversation about [tema]. Speak naturally but stop me if I say something that sounds unnatural."</div></div>
       <div class="tech-step"><div class="tech-step-num" style="background:#4285F4;color:#fff;">3</div><div class="tech-step-txt"><strong>Modo roleplay:</strong> "Let's do a roleplay: you're [personaje]. Stay in character. Correct my English only after the scene ends."</div></div>
       <div class="tech-step"><div class="tech-step-num" style="background:#4285F4;color:#fff;">4</div><div class="tech-step-txt"><strong>Modo debate:</strong> "Debate me on [tema]. Take the opposite side of whatever I say. Don't let me off the hook — push back hard."</div></div>
@@ -752,7 +752,8 @@ header{position:relative;z-index:1;text-align:center;padding:40px 20px 0;}
   <div class="hack-card">
     <div class="hack-emoji">🚗</div>
     <div class="hack-info"><div class="hack-name">Shadowing mientras manejas</div><div class="hack-desc">Pon un podcast en inglés en el coche. Sin subtítulos, sin parar. 20 min de trayecto = 20 min de input que antes eran tiempo muerto.</div></div>
-  </div>
+
+    </div>
   <div class="hack-card">
     <div class="hack-emoji">💬</div>
     <div class="hack-info"><div class="hack-name">Mensajes de voz en inglés (a ti mismo)</div><div class="hack-desc">Cuando tengas un pensamiento complejo, envíate un mensaje de voz en inglés. Luego escúchalo. Output + input en 1 minuto.</div></div>
@@ -828,7 +829,7 @@ const WEEKS_DATA=[
       {id:"1-5-3",icon:"🌍",name:"HiNative — Feedback de nativos",time:"15 min",tag:"OUTPUT",tool:"HiNative",url:"https://hinative.com",desc:"Graba tu pronunciación de 5 palabras difíciles. Nativos te corrigen gratis."},
     ]},
     {id:"1-6",label:"DÍA 6",day:"Sábado",acts:[
-      {id:"1-6-1",icon:"📺",name:"Input libre — Serie en inglés",time:"40 min",tag:"INPUT",tool:"YouTube",url:"https://youtube.com",desc:"20 min con subtítulos en inglés. 20 min SIN subtítulos. No pares cuando no entiendas."},
+     {id:"1-6-1",icon:"📺",name:"Input libre — Serie en inglés",time:"40 min",tag:"INPUT",tool:"YouTube",url:"https://youtube.com",desc:"20 min con subtítulos en inglés. 20 min SIN subtítulos. No pares cuando no entiendas."},
       {id:"1-6-2",icon:"🃏",name:"Anki — Repaso semanal",time:"20 min",tag:"SRS",tool:"AnkiWeb",url:"https://ankiweb.net",desc:"Hoy Anki mostrará muchas tarjetas. Completa todo el stack sin saltarte ninguna."},
     ]},
     {id:"1-7",label:"DÍA 7 🏆",day:"Domingo — RETO",acts:[
@@ -954,39 +955,23 @@ const TC={SRS:'#38BDF8',INPUT:'#D4BC5A',OUTPUT:'#FF6B35',SHADOWING:'#A78BFA',TÉ
 let STATE={m:{completed:{}},t:{completed:{}}};
 let activePlayer='m', activeWeekIdx=0, openDays={}, initialized=false;
 
-/* ═══ RENDER IMMEDIATELY — no esperar Firebase ═══ */
-(function bootApp(){
-  initialized=true;
-  const loader=document.getElementById('loader');
-  loader.classList.add('hidden');
-  setTimeout(()=>{ if(loader.parentNode) loader.remove(); },500);
-  renderAll();
-})();
-
-/* ═══ FIREBASE LISTENERS — sync silently in background ═══ */
+/* ═══ FIREBASE LISTENERS — sync in background ═══ */
 db.ref(ROOT).on('value',(snap)=>{
   const v=snap.val()||{};
   const newM=v.m||{completed:{}};
   const newT=v.t||{completed:{}};
   if(!newM.completed) newM.completed={};
   if(!newT.completed) newT.completed={};
-  // Only re-render if data actually changed
-  const changed = JSON.stringify(newM)!==JSON.stringify(STATE.m) || JSON.stringify(newT)!==JSON.stringify(STATE.t);
-  STATE.m=newM;
-  STATE.t=newT;
+  const changed=JSON.stringify(newM)!==JSON.stringify(STATE.m)||JSON.stringify(newT)!==JSON.stringify(STATE.t);
+  STATE.m=newM; STATE.t=newT;
   if(changed) renderAll();
-},(err)=>{
-  console.warn('Firebase offline, running locally:', err);
-});
+},(err)=>{ console.warn('Firebase sync error:', err); });
 
 db.ref('.info/connected').on('value',(snap)=>{
   const on=snap.val()===true;
   const b=document.getElementById('conn-badge');
   const t=document.getElementById('conn-text');
-  if(b && t){
-    b.className=`conn-badge ${on?'online':'offline'}`;
-    t.textContent=on?'en vivo':'sin conexión';
-  }
+  if(b&&t){ b.className=`conn-badge ${on?'online':'offline'}`; t.textContent=on?'en vivo':'sin conexión'; }
 });
 
 /* ═══ FIREBASE WRITE ═══ */
@@ -1183,6 +1168,17 @@ function confirmReset(){
     if(confirm('⚠️ ÚLTIMA OPORTUNIDAD: Se borrará el progreso de Marrito Y Tanito para siempre.')){fbReset();}
   }
 }
+
+/* ═══ BOOT — runs last, after ALL functions and listeners are ready ═══ */
+(function(){
+  const loader=document.getElementById('loader');
+  try {
+    renderAll();
+  } catch(e) {
+    console.error('renderAll error:', e);
+  }
+  if(loader){ loader.classList.add('hidden'); setTimeout(()=>{ if(loader.parentNode) loader.remove(); },500); }
+})();
 </script>
 
 </body>
